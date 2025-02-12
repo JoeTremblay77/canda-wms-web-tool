@@ -1,0 +1,104 @@
+﻿@model CandaWebUtility.Controllers.TestController.TestViewModel
+@using GridMvc.Html
+@{
+    ViewBag.Title = "Tests";
+}
+
+<div class="blob">
+
+    <h4>Ajax</h4>
+    <div id="AjaxTestDiv">
+        @Html.Action("TesterList", "Test", new { id = Model.ParentUniqueId })
+    </div>
+</div>
+
+<div class="blob blob-wide">
+
+    <h4>
+        Grid and   Grid Date Picker
+    </h4>
+
+    <div class="grid-container">
+        @Html.Grid(Model.List).Columns(columns =>
+{
+    columns.Add(c => c.Count).Titled("Index").Sortable(true).Filterable(true);
+    columns.Add(c => c.Name).Titled("Name").Sortable(true).Filterable(true);
+    columns.Add(c => c.DateCreated).Titled("DateCreated").Sortable(true);
+    //    columns.Add().Encoded(false).Sanitized(false).SetWidth(20).RenderValueAs(o => Html.ActionLink("Edit", "Edit", new { id = o.Count }));
+}).WithPaging(1000).Sortable(true).Filterable(true).WithMultipleFilters()
+    </div>
+</div>
+
+<div class="blob">
+
+    <p>
+        <h4>
+            Currency text box
+        </h4>
+        <input type="text" id="currency-test" class="form-control highlight-changes" />
+    </p>
+
+    <p>
+        <h4>
+            Numeric text box with decimals
+        </h4>
+        <input type="text" id="with-decimal" class="form-control highlight-changes" />
+    </p>
+
+    <p>
+        <h4>
+            Numeric text box no decimals
+        </h4>
+        <input type="text" id="no-decimal" class="form-control highlight-changes" value="3" />
+    </p>
+
+    <p>
+        <h4>
+            Date picker
+        </h4>
+        <input id="datepicker1" class="form-control highlight-changes" data-provide="datepicker" data-date-format="D M d yyyy" readonly="readonly" value="Wed Apr 16 2014" />
+    </p>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+
+        $('#datepicker1').on('change', function () {
+            $('.datepicker').hide();
+        });
+
+        $('.highlight-changes').change(function (event) {
+            $(this).css("background-color", "@Defaults.ValueChangedBackground");
+        });
+
+        // number inputs
+        jQuery(function ($) {
+            $('#currency-test').autoNumeric("init", {
+                aSep: ',',
+                aDec: '.',
+                aSign: '$',
+                vMin: '0.00',
+                vMax: '999999999.99'
+            });
+
+            $('#with-decimal').autoNumeric("init", {
+                aSep: '',
+                aDec: '.',
+                aSign: '',
+                vMin: '0.000',
+                vMax: '9999.999'
+            });
+
+            $('#no-decimal').autoNumeric("init", {
+                aSep: '',
+                aDec: '.',
+                aSign: '',
+                vMin: '0',
+                vMax: '9999'
+            });
+        });
+        // end of number inputs
+    </script>
+}

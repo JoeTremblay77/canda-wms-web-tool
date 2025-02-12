@@ -1,0 +1,21 @@
+zip pwd: T7d8876$23
+
+Development notes: 
+1. The project had to be upgraded to 4.8.1, we should not be using 4.6 any more.  This is an upgrade-in-place update so nothing should be impacted in IIS etc. 
+2. 
+
+EMAIL: 
+>>>> 
+Hi Joe,
+
+Below is link for the Koerber webpage program to load and change lotnum#.  I can get the program to compile. 
+
+I believe problem is old program can no longer uniquely identify the BINLOCAT line for an item.  Because we use CLIENT now, and the EXTENDED field data is changed to, for example /BC/lotnum or /AB/lotnum
+
+Could you help take a look and see where changes are to needed to properly find the lotnum and update/alter?
+Please follow up if you need help to login and/or see how the program works.  Thanks!
+
+Regards,
+David Wai
+I.T. Administrator  |  Canda Six Fortune Enterprise Co. Ltd.
+<<<<

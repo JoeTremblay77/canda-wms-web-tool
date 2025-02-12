@@ -1,0 +1,6 @@
+﻿/*
+    This file is rendered last in BundleConfig.cs so any html or class from bootstrap or site.css can be safely overridden here.
+
+   The customization for this site was done in the site.css file including bootstrap overrides.
+
+*/

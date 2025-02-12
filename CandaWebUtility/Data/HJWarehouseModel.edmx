@@ -1,0 +1,799 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="HJWarehouseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BINLOCAT">
+          <Key>
+            <PropertyRef Name="ROWID" />
+          </Key>
+          <Property Name="ROWID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BINLABEL" Type="nvarchar" MaxLength="8" />
+          <Property Name="PRODUCT" Type="nvarchar" MaxLength="100" />
+          <Property Name="QUANTITY" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="PACKSIZE" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="UNALLOC" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="USER_ID" Type="nvarchar" MaxLength="25" />
+          <Property Name="CLIENT" Type="nvarchar" MaxLength="1" />
+          <Property Name="COUNTED" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="EXTENDED" Type="nvarchar" MaxLength="150" />
+          <Property Name="PO_NUM" Type="nvarchar" MaxLength="25" />
+          <Property Name="RECV_SLIP" Type="nvarchar" MaxLength="20" />
+          <Property Name="RETURN_BIN" Type="nvarchar" MaxLength="8" />
+          <Property Name="WAREHOUSE" Type="nvarchar" MaxLength="10" />
+          <Property Name="COMMENT_IN" Type="nvarchar" MaxLength="16" />
+          <Property Name="RESERVED" Type="nvarchar" MaxLength="20" />
+          <Property Name="DATECREATE" Type="datetime" />
+          <Property Name="TOWER" Type="nvarchar" MaxLength="3" />
+          <Property Name="MODIFIED" Type="nvarchar" MaxLength="1" />
+          <Property Name="RECV_PONUM" Type="nvarchar" MaxLength="20" />
+          <Property Name="LINE_NUM" Type="nvarchar" MaxLength="20" />
+          <Property Name="CLIENTNAME" Type="nvarchar" MaxLength="15" />
+          <Property Name="TENANTID" Type="nvarchar" MaxLength="36" />
+          <Property Name="DATE_TIME" Type="nvarchar" MaxLength="23" />
+          <Property Name="CNT_USER_ID" Type="nvarchar" MaxLength="25" />
+          <Property Name="LICENSE_PLATE" Type="nvarchar" MaxLength="34" />
+          <Property Name="TRANSFER" Type="nvarchar" MaxLength="20" />
+          <Property Name="TIMECREATE" Type="nvarchar" MaxLength="16" />
+          <Property Name="PO_LINE_UNIT_COST" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="ADDED_UNIT_COST" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="TOTAL_UNIT_COST" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="BINTYPE" Type="nvarchar" MaxLength="1" />
+          <Property Name="FROM_BIN" Type="nvarchar" MaxLength="8" />
+          <Property Name="INNERPACK" Type="int" />
+          <Property Name="LOCATION" Type="nvarchar" MaxLength="10" />
+          <Property Name="MAX_PACK" Type="int" />
+          <Property Name="MIN_PACK" Type="int" />
+          <Property Name="PUSHBACK" Type="int" />
+          <Property Name="ZONE" Type="nvarchar" MaxLength="2" />
+          <Property Name="IS_BONDED" Type="nvarchar" MaxLength="1" />
+          <Property Name="EXTRA1" Type="nvarchar" MaxLength="40" />
+          <Property Name="EXTRA2" Type="nvarchar" MaxLength="40" />
+          <Property Name="VEND_NUM" Type="nvarchar" MaxLength="20" />
+          <Property Name="DATE_RECVD" Type="datetime" />
+          <Property Name="DATE_SHIPPED" Type="datetime" />
+          <Property Name="PACKSLIP" Type="nvarchar" MaxLength="20" />
+          <Property Name="ORDER_SEQ" Type="nvarchar" MaxLength="20" />
+          <Property Name="CUST_NUM" Type="nvarchar" MaxLength="16" />
+          <Property Name="SO_LINE_UNIT_PRICE" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="GROSS_PROFIT" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="PROD_CLASS" Type="nvarchar" MaxLength="20" />
+          <Property Name="SALESMAN" Type="nvarchar" MaxLength="50" />
+          <Property Name="BUYER" Type="nvarchar" MaxLength="50" />
+          <Property Name="DOCUMENT_REF" Type="nvarchar" MaxLength="36" />
+          <Property Name="UNITS" Type="decimal" Precision="18" Scale="6" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PASSWORD">
+          <Key>
+            <PropertyRef Name="ROWID" />
+          </Key>
+          <Property Name="ROWID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ISADMIN" Type="char" MaxLength="1" />
+          <Property Name="ID" Type="nvarchar" MaxLength="25" />
+          <Property Name="NAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="PASSWORD" Type="nvarchar" MaxLength="28" />
+          <Property Name="PRIVILEGE" Type="smallint" />
+          <Property Name="CLIENTNAME" Type="nvarchar" MaxLength="15" />
+          <Property Name="TENANTID" Type="nvarchar" MaxLength="36" />
+          <Property Name="SECURITY" Type="nvarchar" MaxLength="20" />
+          <Property Name="PRNTR_PICK" Type="smallint" />
+          <Property Name="PRNTR_RECV" Type="smallint" />
+          <Property Name="PRNTR_SHIP" Type="smallint" />
+          <Property Name="PRNTR_PACK" Type="smallint" />
+          <Property Name="USER_LANG" Type="nvarchar" MaxLength="10" />
+          <Property Name="CUST_NUM" Type="nvarchar" MaxLength="16" />
+          <Property Name="RFTERMID" Type="bigint" />
+          <Property Name="COMPUTER" Type="nvarchar" MaxLength="20" />
+          <Property Name="LOCATION" Type="nvarchar" MaxLength="10" />
+          <Property Name="PRNTR_BIN" Type="smallint" />
+          <Property Name="PRNTR_PROD" Type="smallint" />
+        </EntityType>
+        <EntityType Name="PRODMSTR">
+          <Key>
+            <PropertyRef Name="ROWID" />
+          </Key>
+          <Property Name="ROWID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PRODUCT" Type="nvarchar" MaxLength="100" />
+          <Property Name="ITEMTYPE" Type="nvarchar" MaxLength="20" />
+          <Property Name="DESCRIPT" Type="nvarchar" MaxLength="100" />
+          <Property Name="UNITMEASUR" Type="nvarchar" MaxLength="6" />
+          <Property Name="IS_SERIAL" Type="nvarchar" MaxLength="1" />
+          <Property Name="BINLABEL" Type="nvarchar" MaxLength="8" />
+          <Property Name="DYNAMICBIN" Type="nvarchar" MaxLength="8" />
+          <Property Name="AGGRE_BIN" Type="nvarchar" MaxLength="8" />
+          <Property Name="BULKSLOT" Type="nvarchar" MaxLength="8" />
+          <Property Name="CARTON_DEF" Type="int" />
+          <Property Name="LOC_SIZE" Type="nvarchar" MaxLength="2" />
+          <Property Name="ZONE_CODE" Type="nvarchar" MaxLength="2" />
+          <Property Name="BOOK_COUNT" Type="bigint" />
+          <Property Name="REPLEN_QTY" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="Q_ALLOCATE" Type="int" />
+          <Property Name="TIE_COUNT" Type="int" />
+          <Property Name="HIGHCOUNT" Type="int" />
+          <Property Name="WEIGHT" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="HEIGHT" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="WIDTH" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="LENGTH" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="CUBAGE" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="FLOOR_STK" Type="nvarchar" MaxLength="1" />
+          <Property Name="SELL_PRICE" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="COST_PRICE" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="UPC" Type="nvarchar" MaxLength="14" />
+          <Property Name="EXTENDED" Type="nvarchar" MaxLength="150" />
+          <Property Name="SUBSTITUTE" Type="nvarchar" MaxLength="20" />
+          <Property Name="AVG_PICKS" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="AVG_UNITS" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="AVG_CUBE" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="PROD_CLASS" Type="nvarchar" MaxLength="10" />
+          <Property Name="RECV_ATTR" Type="nvarchar" MaxLength="10" />
+          <Property Name="PICK_ATTR" Type="nvarchar" MaxLength="10" />
+          <Property Name="ATTRIBUTE1" Type="nvarchar" MaxLength="25" />
+          <Property Name="ATTRIBUTE2" Type="nvarchar" MaxLength="25" />
+          <Property Name="ATTRIBUTE3" Type="nvarchar" MaxLength="25" />
+          <Property Name="ATTRIBUTE4" Type="nvarchar" MaxLength="25" />
+          <Property Name="ATTRIBUTE5" Type="nvarchar" MaxLength="25" />
+          <Property Name="ATTRIBUTE6" Type="nvarchar" MaxLength="25" />
+          <Property Name="ATTRIBUTE7" Type="nvarchar" MaxLength="25" />
+          <Property Name="ATTRIBUTE8" Type="nvarchar" MaxLength="25" />
+          <Property Name="ATTRIBUTE9" Type="nvarchar" MaxLength="25" />
+          <Property Name="ATTRIBUT10" Type="nvarchar" MaxLength="25" />
+          <Property Name="ASSEMBLY" Type="nvarchar" MaxLength="1" />
+          <Property Name="FIFTY_RULE" Type="int" />
+          <Property Name="LEAD_TIME" Type="smallint" />
+          <Property Name="ORDERGROUPS" Type="nvarchar" MaxLength="20" />
+          <Property Name="REFORECAST" Type="char" MaxLength="1" />
+          <Property Name="VEND_PACKSIZE" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="DATECREATE" Type="datetime" />
+          <Property Name="DATE_MODFY" Type="datetime" />
+          <Property Name="SIZE1" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="SIZE2" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="SIZE3" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="SIZE4" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="SIZE5" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="FORECAST" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="DFLTRANDOM" Type="nvarchar" MaxLength="1" />
+          <Property Name="HANDLECODE" Type="nvarchar" MaxLength="1" />
+          <Property Name="SIZECODE" Type="nvarchar" MaxLength="1" />
+          <Property Name="REACHCODE" Type="nvarchar" MaxLength="1" />
+          <Property Name="EXPIRYDATE" Type="nvarchar" MaxLength="1" />
+          <Property Name="MIN_PACK1" Type="int" />
+          <Property Name="MIN_PACK2" Type="int" />
+          <Property Name="MIN_PACK3" Type="int" />
+          <Property Name="MIN_PACK4" Type="int" />
+          <Property Name="MIN_PACK5" Type="int" />
+          <Property Name="MIN_UNITS" Type="int" />
+          <Property Name="MIN_INNER" Type="int" />
+          <Property Name="MIN_CARTON" Type="int" />
+          <Property Name="CONV_QTY" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="STOCK_ITEM" Type="smallint" />
+          <Property Name="M_T_D" Type="int" />
+          <Property Name="VEND_NUM" Type="nvarchar" MaxLength="16" />
+          <Property Name="ON_HAND" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="ON_SALES" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="ON_PURCH" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="NET_STOCK" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="FREE_SAMPL" Type="int" />
+          <Property Name="EDP_NUM" Type="nvarchar" MaxLength="10" />
+          <Property Name="FREIGHT_CL" Type="nvarchar" MaxLength="5" />
+          <Property Name="TARIFF_CL" Type="nvarchar" MaxLength="10" />
+          <Property Name="C_ORIGIN" Type="nvarchar" MaxLength="6" />
+          <Property Name="HAZMAT" Type="nvarchar" MaxLength="6" />
+          <Property Name="CLIENTNAME" Type="nvarchar" MaxLength="15" />
+          <Property Name="TENANTID" Type="nvarchar" MaxLength="36" />
+          <Property Name="VEND_PROD" Type="nvarchar" MaxLength="30" />
+          <Property Name="TRIG_PNT" Type="int" />
+          <Property Name="TRIG_VAL" Type="smallint" />
+          <Property Name="ORD_GROUP" Type="nvarchar" MaxLength="20" />
+          <Property Name="REORDER" Type="int" />
+          <Property Name="BUYER" Type="nvarchar" MaxLength="10" />
+          <Property Name="GRP_LIMIT1" Type="int" />
+          <Property Name="GRP_LIMIT2" Type="int" />
+          <Property Name="GRP_LIMIT3" Type="int" />
+          <Property Name="GRP_LIMIT4" Type="int" />
+          <Property Name="GRP_LIMIT5" Type="int" />
+          <Property Name="GRP_LIMIT6" Type="int" />
+          <Property Name="GRP_LIMIT7" Type="int" />
+          <Property Name="GRP_LIMIT8" Type="int" />
+          <Property Name="GRP_LIMIT9" Type="int" />
+          <Property Name="COMMODITY" Type="nvarchar" MaxLength="10" />
+          <Property Name="STACKABLE" Type="char" MaxLength="1" />
+          <Property Name="RECYCLABLE" Type="char" MaxLength="1" />
+          <Property Name="EXPLODEKIT" Type="char" MaxLength="1" />
+          <Property Name="TOLERANCE" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="SHELF_LIFE" Type="int" />
+          <Property Name="MAX_PACK1" Type="int" />
+          <Property Name="MAX_PACK2" Type="int" />
+          <Property Name="MAX_PACK3" Type="int" />
+          <Property Name="MAX_PACK4" Type="int" />
+          <Property Name="MAX_PACK5" Type="int" />
+          <Property Name="CURRENCY_ID" Type="nvarchar" MaxLength="1" />
+          <Property Name="FORECAST_6" Type="bigint" />
+          <Property Name="FORECAST_TYPE" Type="nvarchar" MaxLength="20" />
+          <Property Name="F_TYPE" Type="smallint" />
+          <Property Name="INNERPACK1" Type="int" />
+          <Property Name="INNERPACK2" Type="int" />
+          <Property Name="INNERPACK3" Type="int" />
+          <Property Name="INNERPACK4" Type="int" />
+          <Property Name="INNERPACK5" Type="int" />
+          <Property Name="INVENTORY_QTY" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="RESERVE_MIN" Type="int" />
+          <Property Name="SKU_ID" Type="int" />
+          <Property Name="STATUS" Type="nvarchar" MaxLength="1" />
+          <Property Name="STOCKOUT" Type="bigint" />
+          <Property Name="BOX_SIZE" Type="nvarchar" MaxLength="10" />
+          <Property Name="PROD_UDF1" Type="nvarchar" MaxLength="30" />
+          <Property Name="PROD_UDF2" Type="nvarchar" MaxLength="30" />
+          <Property Name="PROD_UDF3" Type="nvarchar" MaxLength="30" />
+          <Property Name="PROD_UDF4" Type="nvarchar" MaxLength="30" />
+          <Property Name="PROD_UDF5" Type="nvarchar" MaxLength="30" />
+          <Property Name="PACK_CLASS" Type="nvarchar" MaxLength="10" />
+          <Property Name="LASTCOUNT" Type="datetime" />
+          <Property Name="OVERDUE" Type="int" />
+          <Property Name="STOCK_STATUS" Type="nvarchar" MaxLength="20" />
+          <Property Name="CLIENTNO" Type="nvarchar" MaxLength="15" />
+          <Property Name="MIN_QTY" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="MAX_QTY" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="ITEM_OWNER" Type="nvarchar" MaxLength="40" />
+          <Property Name="EXPIRY_DAYS" Type="int" />
+          <Property Name="STICKY_BIN" Type="nvarchar" MaxLength="8" />
+          <Property Name="MODIFIED_TIME" Type="datetime" />
+          <Property Name="UPDATE_FLAG" Type="nvarchar" MaxLength="1" />
+          <Property Name="INV_BILL_NET" Type="bigint" />
+          <Property Name="INV_BILL_DATE" Type="datetime" />
+          <Property Name="PRECISION" Type="smallint" />
+          <Property Name="PRECISION_PACKS" Type="smallint" />
+          <Property Name="RECV_OVER_PERCENT" Type="nvarchar" MaxLength="6" />
+          <Property Name="DOCUMENT_REF" Type="nvarchar" MaxLength="36" />
+          <Property Name="OuterPack" Type="nvarchar" MaxLength="40" />
+          <Property Name="InnerPack" Type="nvarchar" MaxLength="40" />
+          <Property Name="ISBN" Type="nvarchar" MaxLength="40" />
+          <Property Name="EAN" Type="nvarchar" MaxLength="40" />
+          <Property Name="UPCCaseCode" Type="nvarchar" MaxLength="40" />
+          <Property Name="NatlDrugCode" Type="nvarchar" MaxLength="40" />
+          <Property Name="GTIN" Type="nvarchar" MaxLength="40" />
+        </EntityType>
+        <EntityContainer Name="HJWarehouseModelStoreContainer">
+          <EntitySet Name="BINLOCAT" EntityType="Self.BINLOCAT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PASSWORD" EntityType="Self.PASSWORD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODMSTR" EntityType="Self.PRODMSTR" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HJWarehouseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="HJWarehouseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BINLOCAT" EntityType="HJWarehouseModel.BINLOCAT" />
+          <EntitySet Name="PRODMSTR" EntityType="HJWarehouseModel.PRODMSTR" />
+          <EntitySet Name="PASSWORD" EntityType="HJWarehouseModel.PASSWORD" />
+        </EntityContainer>
+        <EntityType Name="BINLOCAT">
+          <Key>
+            <PropertyRef Name="ROWID" />
+          </Key>
+          <Property Name="ROWID" Type="Guid" Nullable="false" />
+          <Property Name="BINLABEL" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="PRODUCT" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="QUANTITY" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="PACKSIZE" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="UNALLOC" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="USER_ID" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="CLIENT" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="COUNTED" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="EXTENDED" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="PO_NUM" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="RECV_SLIP" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="RETURN_BIN" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="WAREHOUSE" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="COMMENT_IN" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="RESERVED" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DATECREATE" Type="DateTime" Precision="3" />
+          <Property Name="TOWER" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="MODIFIED" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="RECV_PONUM" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="LINE_NUM" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CLIENTNAME" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="TENANTID" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="DATE_TIME" Type="String" MaxLength="23" FixedLength="false" Unicode="true" />
+          <Property Name="CNT_USER_ID" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="LICENSE_PLATE" Type="String" MaxLength="34" FixedLength="false" Unicode="true" />
+          <Property Name="TRANSFER" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TIMECREATE" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="PO_LINE_UNIT_COST" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="ADDED_UNIT_COST" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="TOTAL_UNIT_COST" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="BINTYPE" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="FROM_BIN" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="INNERPACK" Type="Int32" />
+          <Property Name="LOCATION" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MAX_PACK" Type="Int32" />
+          <Property Name="MIN_PACK" Type="Int32" />
+          <Property Name="PUSHBACK" Type="Int32" />
+          <Property Name="ZONE" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="IS_BONDED" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="EXTRA1" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="EXTRA2" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="VEND_NUM" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DATE_RECVD" Type="DateTime" Precision="3" />
+          <Property Name="DATE_SHIPPED" Type="DateTime" Precision="3" />
+          <Property Name="PACKSLIP" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ORDER_SEQ" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CUST_NUM" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="SO_LINE_UNIT_PRICE" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="GROSS_PROFIT" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="PROD_CLASS" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SALESMAN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BUYER" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DOCUMENT_REF" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PRODMSTR">
+          <Key>
+            <PropertyRef Name="ROWID" />
+          </Key>
+          <Property Name="ROWID" Type="Guid" Nullable="false" />
+          <Property Name="PRODUCT" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ITEMTYPE" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DESCRIPT" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UNITMEASUR" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="IS_SERIAL" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="BINLABEL" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="DYNAMICBIN" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="AGGRE_BIN" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="BULKSLOT" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="CARTON_DEF" Type="Int32" />
+          <Property Name="LOC_SIZE" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="ZONE_CODE" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="BOOK_COUNT" Type="Int64" />
+          <Property Name="REPLEN_QTY" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="Q_ALLOCATE" Type="Int32" />
+          <Property Name="TIE_COUNT" Type="Int32" />
+          <Property Name="HIGHCOUNT" Type="Int32" />
+          <Property Name="WEIGHT" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="HEIGHT" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="WIDTH" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="LENGTH" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="CUBAGE" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="FLOOR_STK" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="SELL_PRICE" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="COST_PRICE" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="UPC" Type="String" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="EXTENDED" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="SUBSTITUTE" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="AVG_PICKS" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="AVG_UNITS" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="AVG_CUBE" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="PROD_CLASS" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="RECV_ATTR" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PICK_ATTR" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ATTRIBUTE1" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="ATTRIBUTE2" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="ATTRIBUTE3" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="ATTRIBUTE4" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="ATTRIBUTE5" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="ATTRIBUTE6" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="ATTRIBUTE7" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="ATTRIBUTE8" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="ATTRIBUTE9" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="ATTRIBUT10" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="ASSEMBLY" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="FIFTY_RULE" Type="Int32" />
+          <Property Name="LEAD_TIME" Type="Int16" />
+          <Property Name="ORDERGROUPS" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REFORECAST" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="VEND_PACKSIZE" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="DATECREATE" Type="DateTime" Precision="3" />
+          <Property Name="DATE_MODFY" Type="DateTime" Precision="3" />
+          <Property Name="SIZE1" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="SIZE2" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="SIZE3" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="SIZE4" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="SIZE5" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="FORECAST" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="DFLTRANDOM" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="HANDLECODE" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="SIZECODE" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="REACHCODE" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="EXPIRYDATE" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="MIN_PACK1" Type="Int32" />
+          <Property Name="MIN_PACK2" Type="Int32" />
+          <Property Name="MIN_PACK3" Type="Int32" />
+          <Property Name="MIN_PACK4" Type="Int32" />
+          <Property Name="MIN_PACK5" Type="Int32" />
+          <Property Name="MIN_UNITS" Type="Int32" />
+          <Property Name="MIN_INNER" Type="Int32" />
+          <Property Name="MIN_CARTON" Type="Int32" />
+          <Property Name="CONV_QTY" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="STOCK_ITEM" Type="Int16" />
+          <Property Name="M_T_D" Type="Int32" />
+          <Property Name="VEND_NUM" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="ON_HAND" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="ON_SALES" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="ON_PURCH" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="NET_STOCK" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="FREE_SAMPL" Type="Int32" />
+          <Property Name="EDP_NUM" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="FREIGHT_CL" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="TARIFF_CL" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="C_ORIGIN" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="HAZMAT" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="CLIENTNAME" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="TENANTID" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="VEND_PROD" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="TRIG_PNT" Type="Int32" />
+          <Property Name="TRIG_VAL" Type="Int16" />
+          <Property Name="ORD_GROUP" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REORDER" Type="Int32" />
+          <Property Name="BUYER" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="GRP_LIMIT1" Type="Int32" />
+          <Property Name="GRP_LIMIT2" Type="Int32" />
+          <Property Name="GRP_LIMIT3" Type="Int32" />
+          <Property Name="GRP_LIMIT4" Type="Int32" />
+          <Property Name="GRP_LIMIT5" Type="Int32" />
+          <Property Name="GRP_LIMIT6" Type="Int32" />
+          <Property Name="GRP_LIMIT7" Type="Int32" />
+          <Property Name="GRP_LIMIT8" Type="Int32" />
+          <Property Name="GRP_LIMIT9" Type="Int32" />
+          <Property Name="COMMODITY" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="STACKABLE" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="RECYCLABLE" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="EXPLODEKIT" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="TOLERANCE" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="SHELF_LIFE" Type="Int32" />
+          <Property Name="MAX_PACK1" Type="Int32" />
+          <Property Name="MAX_PACK2" Type="Int32" />
+          <Property Name="MAX_PACK3" Type="Int32" />
+          <Property Name="MAX_PACK4" Type="Int32" />
+          <Property Name="MAX_PACK5" Type="Int32" />
+          <Property Name="CURRENCY_ID" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="FORECAST_6" Type="Int64" />
+          <Property Name="FORECAST_TYPE" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="F_TYPE" Type="Int16" />
+          <Property Name="INNERPACK1" Type="Int32" />
+          <Property Name="INNERPACK2" Type="Int32" />
+          <Property Name="INNERPACK3" Type="Int32" />
+          <Property Name="INNERPACK4" Type="Int32" />
+          <Property Name="INNERPACK5" Type="Int32" />
+          <Property Name="INVENTORY_QTY" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="RESERVE_MIN" Type="Int32" />
+          <Property Name="SKU_ID" Type="Int32" />
+          <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="STOCKOUT" Type="Int64" />
+          <Property Name="BOX_SIZE" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PROD_UDF1" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="PROD_UDF2" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="PROD_UDF3" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="PROD_UDF4" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="PROD_UDF5" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="PACK_CLASS" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="LASTCOUNT" Type="DateTime" Precision="3" />
+          <Property Name="OVERDUE" Type="Int32" />
+          <Property Name="STOCK_STATUS" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CLIENTNO" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="MIN_QTY" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="MAX_QTY" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="ITEM_OWNER" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="EXPIRY_DAYS" Type="Int32" />
+          <Property Name="STICKY_BIN" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="MODIFIED_TIME" Type="DateTime" Precision="3" />
+          <Property Name="UPDATE_FLAG" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="INV_BILL_NET" Type="Int64" />
+          <Property Name="INV_BILL_DATE" Type="DateTime" Precision="3" />
+          <Property Name="PRECISION" Type="Int16" />
+          <Property Name="PRECISION_PACKS" Type="Int16" />
+          <Property Name="RECV_OVER_PERCENT" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="DOCUMENT_REF" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="OuterPack" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="InnerPack" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ISBN" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="EAN" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="UPCCaseCode" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="NatlDrugCode" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="GTIN" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PASSWORD">
+          <Key>
+            <PropertyRef Name="ROWID" />
+          </Key>
+          <Property Name="ROWID" Type="Guid" Nullable="false" />
+          <Property Name="ISADMIN" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="ID" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PASSWORD1" Type="String" MaxLength="28" FixedLength="false" Unicode="true" />
+          <Property Name="PRIVILEGE" Type="Int16" />
+          <Property Name="CLIENTNAME" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="TENANTID" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="SECURITY" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PRNTR_PICK" Type="Int16" />
+          <Property Name="PRNTR_RECV" Type="Int16" />
+          <Property Name="PRNTR_SHIP" Type="Int16" />
+          <Property Name="PRNTR_PACK" Type="Int16" />
+          <Property Name="USER_LANG" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CUST_NUM" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="RFTERMID" Type="Int64" />
+          <Property Name="COMPUTER" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="LOCATION" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PRNTR_BIN" Type="Int16" />
+          <Property Name="PRNTR_PROD" Type="Int16" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HJWarehouseModelStoreContainer" CdmEntityContainer="HJWarehouseEntities">
+          <EntitySetMapping Name="BINLOCAT">
+            <EntityTypeMapping TypeName="HJWarehouseModel.BINLOCAT">
+              <MappingFragment StoreEntitySet="BINLOCAT">
+                <ScalarProperty Name="DOCUMENT_REF" ColumnName="DOCUMENT_REF" />
+                <ScalarProperty Name="BUYER" ColumnName="BUYER" />
+                <ScalarProperty Name="SALESMAN" ColumnName="SALESMAN" />
+                <ScalarProperty Name="PROD_CLASS" ColumnName="PROD_CLASS" />
+                <ScalarProperty Name="GROSS_PROFIT" ColumnName="GROSS_PROFIT" />
+                <ScalarProperty Name="SO_LINE_UNIT_PRICE" ColumnName="SO_LINE_UNIT_PRICE" />
+                <ScalarProperty Name="CUST_NUM" ColumnName="CUST_NUM" />
+                <ScalarProperty Name="ORDER_SEQ" ColumnName="ORDER_SEQ" />
+                <ScalarProperty Name="PACKSLIP" ColumnName="PACKSLIP" />
+                <ScalarProperty Name="DATE_SHIPPED" ColumnName="DATE_SHIPPED" />
+                <ScalarProperty Name="DATE_RECVD" ColumnName="DATE_RECVD" />
+                <ScalarProperty Name="VEND_NUM" ColumnName="VEND_NUM" />
+                <ScalarProperty Name="EXTRA2" ColumnName="EXTRA2" />
+                <ScalarProperty Name="EXTRA1" ColumnName="EXTRA1" />
+                <ScalarProperty Name="IS_BONDED" ColumnName="IS_BONDED" />
+                <ScalarProperty Name="ZONE" ColumnName="ZONE" />
+                <ScalarProperty Name="PUSHBACK" ColumnName="PUSHBACK" />
+                <ScalarProperty Name="MIN_PACK" ColumnName="MIN_PACK" />
+                <ScalarProperty Name="MAX_PACK" ColumnName="MAX_PACK" />
+                <ScalarProperty Name="LOCATION" ColumnName="LOCATION" />
+                <ScalarProperty Name="INNERPACK" ColumnName="INNERPACK" />
+                <ScalarProperty Name="FROM_BIN" ColumnName="FROM_BIN" />
+                <ScalarProperty Name="BINTYPE" ColumnName="BINTYPE" />
+                <ScalarProperty Name="TOTAL_UNIT_COST" ColumnName="TOTAL_UNIT_COST" />
+                <ScalarProperty Name="ADDED_UNIT_COST" ColumnName="ADDED_UNIT_COST" />
+                <ScalarProperty Name="PO_LINE_UNIT_COST" ColumnName="PO_LINE_UNIT_COST" />
+                <ScalarProperty Name="TIMECREATE" ColumnName="TIMECREATE" />
+                <ScalarProperty Name="TRANSFER" ColumnName="TRANSFER" />
+                <ScalarProperty Name="LICENSE_PLATE" ColumnName="LICENSE_PLATE" />
+                <ScalarProperty Name="CNT_USER_ID" ColumnName="CNT_USER_ID" />
+                <ScalarProperty Name="DATE_TIME" ColumnName="DATE_TIME" />
+                <ScalarProperty Name="TENANTID" ColumnName="TENANTID" />
+                <ScalarProperty Name="CLIENTNAME" ColumnName="CLIENTNAME" />
+                <ScalarProperty Name="LINE_NUM" ColumnName="LINE_NUM" />
+                <ScalarProperty Name="RECV_PONUM" ColumnName="RECV_PONUM" />
+                <ScalarProperty Name="MODIFIED" ColumnName="MODIFIED" />
+                <ScalarProperty Name="TOWER" ColumnName="TOWER" />
+                <ScalarProperty Name="DATECREATE" ColumnName="DATECREATE" />
+                <ScalarProperty Name="RESERVED" ColumnName="RESERVED" />
+                <ScalarProperty Name="COMMENT_IN" ColumnName="COMMENT_IN" />
+                <ScalarProperty Name="WAREHOUSE" ColumnName="WAREHOUSE" />
+                <ScalarProperty Name="RETURN_BIN" ColumnName="RETURN_BIN" />
+                <ScalarProperty Name="RECV_SLIP" ColumnName="RECV_SLIP" />
+                <ScalarProperty Name="PO_NUM" ColumnName="PO_NUM" />
+                <ScalarProperty Name="EXTENDED" ColumnName="EXTENDED" />
+                <ScalarProperty Name="COUNTED" ColumnName="COUNTED" />
+                <ScalarProperty Name="CLIENT" ColumnName="CLIENT" />
+                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+                <ScalarProperty Name="UNALLOC" ColumnName="UNALLOC" />
+                <ScalarProperty Name="PACKSIZE" ColumnName="PACKSIZE" />
+                <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+                <ScalarProperty Name="PRODUCT" ColumnName="PRODUCT" />
+                <ScalarProperty Name="BINLABEL" ColumnName="BINLABEL" />
+                <ScalarProperty Name="ROWID" ColumnName="ROWID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODMSTR">
+            <EntityTypeMapping TypeName="HJWarehouseModel.PRODMSTR">
+              <MappingFragment StoreEntitySet="PRODMSTR">
+                <ScalarProperty Name="GTIN" ColumnName="GTIN" />
+                <ScalarProperty Name="NatlDrugCode" ColumnName="NatlDrugCode" />
+                <ScalarProperty Name="UPCCaseCode" ColumnName="UPCCaseCode" />
+                <ScalarProperty Name="EAN" ColumnName="EAN" />
+                <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+                <ScalarProperty Name="InnerPack" ColumnName="InnerPack" />
+                <ScalarProperty Name="OuterPack" ColumnName="OuterPack" />
+                <ScalarProperty Name="DOCUMENT_REF" ColumnName="DOCUMENT_REF" />
+                <ScalarProperty Name="RECV_OVER_PERCENT" ColumnName="RECV_OVER_PERCENT" />
+                <ScalarProperty Name="PRECISION_PACKS" ColumnName="PRECISION_PACKS" />
+                <ScalarProperty Name="PRECISION" ColumnName="PRECISION" />
+                <ScalarProperty Name="INV_BILL_DATE" ColumnName="INV_BILL_DATE" />
+                <ScalarProperty Name="INV_BILL_NET" ColumnName="INV_BILL_NET" />
+                <ScalarProperty Name="UPDATE_FLAG" ColumnName="UPDATE_FLAG" />
+                <ScalarProperty Name="MODIFIED_TIME" ColumnName="MODIFIED_TIME" />
+                <ScalarProperty Name="STICKY_BIN" ColumnName="STICKY_BIN" />
+                <ScalarProperty Name="EXPIRY_DAYS" ColumnName="EXPIRY_DAYS" />
+                <ScalarProperty Name="ITEM_OWNER" ColumnName="ITEM_OWNER" />
+                <ScalarProperty Name="MAX_QTY" ColumnName="MAX_QTY" />
+                <ScalarProperty Name="MIN_QTY" ColumnName="MIN_QTY" />
+                <ScalarProperty Name="CLIENTNO" ColumnName="CLIENTNO" />
+                <ScalarProperty Name="STOCK_STATUS" ColumnName="STOCK_STATUS" />
+                <ScalarProperty Name="OVERDUE" ColumnName="OVERDUE" />
+                <ScalarProperty Name="LASTCOUNT" ColumnName="LASTCOUNT" />
+                <ScalarProperty Name="PACK_CLASS" ColumnName="PACK_CLASS" />
+                <ScalarProperty Name="PROD_UDF5" ColumnName="PROD_UDF5" />
+                <ScalarProperty Name="PROD_UDF4" ColumnName="PROD_UDF4" />
+                <ScalarProperty Name="PROD_UDF3" ColumnName="PROD_UDF3" />
+                <ScalarProperty Name="PROD_UDF2" ColumnName="PROD_UDF2" />
+                <ScalarProperty Name="PROD_UDF1" ColumnName="PROD_UDF1" />
+                <ScalarProperty Name="BOX_SIZE" ColumnName="BOX_SIZE" />
+                <ScalarProperty Name="STOCKOUT" ColumnName="STOCKOUT" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="SKU_ID" ColumnName="SKU_ID" />
+                <ScalarProperty Name="RESERVE_MIN" ColumnName="RESERVE_MIN" />
+                <ScalarProperty Name="INVENTORY_QTY" ColumnName="INVENTORY_QTY" />
+                <ScalarProperty Name="INNERPACK5" ColumnName="INNERPACK5" />
+                <ScalarProperty Name="INNERPACK4" ColumnName="INNERPACK4" />
+                <ScalarProperty Name="INNERPACK3" ColumnName="INNERPACK3" />
+                <ScalarProperty Name="INNERPACK2" ColumnName="INNERPACK2" />
+                <ScalarProperty Name="INNERPACK1" ColumnName="INNERPACK1" />
+                <ScalarProperty Name="F_TYPE" ColumnName="F_TYPE" />
+                <ScalarProperty Name="FORECAST_TYPE" ColumnName="FORECAST_TYPE" />
+                <ScalarProperty Name="FORECAST_6" ColumnName="FORECAST_6" />
+                <ScalarProperty Name="CURRENCY_ID" ColumnName="CURRENCY_ID" />
+                <ScalarProperty Name="MAX_PACK5" ColumnName="MAX_PACK5" />
+                <ScalarProperty Name="MAX_PACK4" ColumnName="MAX_PACK4" />
+                <ScalarProperty Name="MAX_PACK3" ColumnName="MAX_PACK3" />
+                <ScalarProperty Name="MAX_PACK2" ColumnName="MAX_PACK2" />
+                <ScalarProperty Name="MAX_PACK1" ColumnName="MAX_PACK1" />
+                <ScalarProperty Name="SHELF_LIFE" ColumnName="SHELF_LIFE" />
+                <ScalarProperty Name="TOLERANCE" ColumnName="TOLERANCE" />
+                <ScalarProperty Name="EXPLODEKIT" ColumnName="EXPLODEKIT" />
+                <ScalarProperty Name="RECYCLABLE" ColumnName="RECYCLABLE" />
+                <ScalarProperty Name="STACKABLE" ColumnName="STACKABLE" />
+                <ScalarProperty Name="COMMODITY" ColumnName="COMMODITY" />
+                <ScalarProperty Name="GRP_LIMIT9" ColumnName="GRP_LIMIT9" />
+                <ScalarProperty Name="GRP_LIMIT8" ColumnName="GRP_LIMIT8" />
+                <ScalarProperty Name="GRP_LIMIT7" ColumnName="GRP_LIMIT7" />
+                <ScalarProperty Name="GRP_LIMIT6" ColumnName="GRP_LIMIT6" />
+                <ScalarProperty Name="GRP_LIMIT5" ColumnName="GRP_LIMIT5" />
+                <ScalarProperty Name="GRP_LIMIT4" ColumnName="GRP_LIMIT4" />
+                <ScalarProperty Name="GRP_LIMIT3" ColumnName="GRP_LIMIT3" />
+                <ScalarProperty Name="GRP_LIMIT2" ColumnName="GRP_LIMIT2" />
+                <ScalarProperty Name="GRP_LIMIT1" ColumnName="GRP_LIMIT1" />
+                <ScalarProperty Name="BUYER" ColumnName="BUYER" />
+                <ScalarProperty Name="REORDER" ColumnName="REORDER" />
+                <ScalarProperty Name="ORD_GROUP" ColumnName="ORD_GROUP" />
+                <ScalarProperty Name="TRIG_VAL" ColumnName="TRIG_VAL" />
+                <ScalarProperty Name="TRIG_PNT" ColumnName="TRIG_PNT" />
+                <ScalarProperty Name="VEND_PROD" ColumnName="VEND_PROD" />
+                <ScalarProperty Name="TENANTID" ColumnName="TENANTID" />
+                <ScalarProperty Name="CLIENTNAME" ColumnName="CLIENTNAME" />
+                <ScalarProperty Name="HAZMAT" ColumnName="HAZMAT" />
+                <ScalarProperty Name="C_ORIGIN" ColumnName="C_ORIGIN" />
+                <ScalarProperty Name="TARIFF_CL" ColumnName="TARIFF_CL" />
+                <ScalarProperty Name="FREIGHT_CL" ColumnName="FREIGHT_CL" />
+                <ScalarProperty Name="EDP_NUM" ColumnName="EDP_NUM" />
+                <ScalarProperty Name="FREE_SAMPL" ColumnName="FREE_SAMPL" />
+                <ScalarProperty Name="NET_STOCK" ColumnName="NET_STOCK" />
+                <ScalarProperty Name="ON_PURCH" ColumnName="ON_PURCH" />
+                <ScalarProperty Name="ON_SALES" ColumnName="ON_SALES" />
+                <ScalarProperty Name="ON_HAND" ColumnName="ON_HAND" />
+                <ScalarProperty Name="VEND_NUM" ColumnName="VEND_NUM" />
+                <ScalarProperty Name="M_T_D" ColumnName="M_T_D" />
+                <ScalarProperty Name="STOCK_ITEM" ColumnName="STOCK_ITEM" />
+                <ScalarProperty Name="CONV_QTY" ColumnName="CONV_QTY" />
+                <ScalarProperty Name="MIN_CARTON" ColumnName="MIN_CARTON" />
+                <ScalarProperty Name="MIN_INNER" ColumnName="MIN_INNER" />
+                <ScalarProperty Name="MIN_UNITS" ColumnName="MIN_UNITS" />
+                <ScalarProperty Name="MIN_PACK5" ColumnName="MIN_PACK5" />
+                <ScalarProperty Name="MIN_PACK4" ColumnName="MIN_PACK4" />
+                <ScalarProperty Name="MIN_PACK3" ColumnName="MIN_PACK3" />
+                <ScalarProperty Name="MIN_PACK2" ColumnName="MIN_PACK2" />
+                <ScalarProperty Name="MIN_PACK1" ColumnName="MIN_PACK1" />
+                <ScalarProperty Name="EXPIRYDATE" ColumnName="EXPIRYDATE" />
+                <ScalarProperty Name="REACHCODE" ColumnName="REACHCODE" />
+                <ScalarProperty Name="SIZECODE" ColumnName="SIZECODE" />
+                <ScalarProperty Name="HANDLECODE" ColumnName="HANDLECODE" />
+                <ScalarProperty Name="DFLTRANDOM" ColumnName="DFLTRANDOM" />
+                <ScalarProperty Name="FORECAST" ColumnName="FORECAST" />
+                <ScalarProperty Name="SIZE5" ColumnName="SIZE5" />
+                <ScalarProperty Name="SIZE4" ColumnName="SIZE4" />
+                <ScalarProperty Name="SIZE3" ColumnName="SIZE3" />
+                <ScalarProperty Name="SIZE2" ColumnName="SIZE2" />
+                <ScalarProperty Name="SIZE1" ColumnName="SIZE1" />
+                <ScalarProperty Name="DATE_MODFY" ColumnName="DATE_MODFY" />
+                <ScalarProperty Name="DATECREATE" ColumnName="DATECREATE" />
+                <ScalarProperty Name="VEND_PACKSIZE" ColumnName="VEND_PACKSIZE" />
+                <ScalarProperty Name="REFORECAST" ColumnName="REFORECAST" />
+                <ScalarProperty Name="ORDERGROUPS" ColumnName="ORDERGROUPS" />
+                <ScalarProperty Name="LEAD_TIME" ColumnName="LEAD_TIME" />
+                <ScalarProperty Name="FIFTY_RULE" ColumnName="FIFTY_RULE" />
+                <ScalarProperty Name="ASSEMBLY" ColumnName="ASSEMBLY" />
+                <ScalarProperty Name="ATTRIBUT10" ColumnName="ATTRIBUT10" />
+                <ScalarProperty Name="ATTRIBUTE9" ColumnName="ATTRIBUTE9" />
+                <ScalarProperty Name="ATTRIBUTE8" ColumnName="ATTRIBUTE8" />
+                <ScalarProperty Name="ATTRIBUTE7" ColumnName="ATTRIBUTE7" />
+                <ScalarProperty Name="ATTRIBUTE6" ColumnName="ATTRIBUTE6" />
+                <ScalarProperty Name="ATTRIBUTE5" ColumnName="ATTRIBUTE5" />
+                <ScalarProperty Name="ATTRIBUTE4" ColumnName="ATTRIBUTE4" />
+                <ScalarProperty Name="ATTRIBUTE3" ColumnName="ATTRIBUTE3" />
+                <ScalarProperty Name="ATTRIBUTE2" ColumnName="ATTRIBUTE2" />
+                <ScalarProperty Name="ATTRIBUTE1" ColumnName="ATTRIBUTE1" />
+                <ScalarProperty Name="PICK_ATTR" ColumnName="PICK_ATTR" />
+                <ScalarProperty Name="RECV_ATTR" ColumnName="RECV_ATTR" />
+                <ScalarProperty Name="PROD_CLASS" ColumnName="PROD_CLASS" />
+                <ScalarProperty Name="AVG_CUBE" ColumnName="AVG_CUBE" />
+                <ScalarProperty Name="AVG_UNITS" ColumnName="AVG_UNITS" />
+                <ScalarProperty Name="AVG_PICKS" ColumnName="AVG_PICKS" />
+                <ScalarProperty Name="SUBSTITUTE" ColumnName="SUBSTITUTE" />
+                <ScalarProperty Name="EXTENDED" ColumnName="EXTENDED" />
+                <ScalarProperty Name="UPC" ColumnName="UPC" />
+                <ScalarProperty Name="COST_PRICE" ColumnName="COST_PRICE" />
+                <ScalarProperty Name="SELL_PRICE" ColumnName="SELL_PRICE" />
+                <ScalarProperty Name="FLOOR_STK" ColumnName="FLOOR_STK" />
+                <ScalarProperty Name="CUBAGE" ColumnName="CUBAGE" />
+                <ScalarProperty Name="LENGTH" ColumnName="LENGTH" />
+                <ScalarProperty Name="WIDTH" ColumnName="WIDTH" />
+                <ScalarProperty Name="HEIGHT" ColumnName="HEIGHT" />
+                <ScalarProperty Name="WEIGHT" ColumnName="WEIGHT" />
+                <ScalarProperty Name="HIGHCOUNT" ColumnName="HIGHCOUNT" />
+                <ScalarProperty Name="TIE_COUNT" ColumnName="TIE_COUNT" />
+                <ScalarProperty Name="Q_ALLOCATE" ColumnName="Q_ALLOCATE" />
+                <ScalarProperty Name="REPLEN_QTY" ColumnName="REPLEN_QTY" />
+                <ScalarProperty Name="BOOK_COUNT" ColumnName="BOOK_COUNT" />
+                <ScalarProperty Name="ZONE_CODE" ColumnName="ZONE_CODE" />
+                <ScalarProperty Name="LOC_SIZE" ColumnName="LOC_SIZE" />
+                <ScalarProperty Name="CARTON_DEF" ColumnName="CARTON_DEF" />
+                <ScalarProperty Name="BULKSLOT" ColumnName="BULKSLOT" />
+                <ScalarProperty Name="AGGRE_BIN" ColumnName="AGGRE_BIN" />
+                <ScalarProperty Name="DYNAMICBIN" ColumnName="DYNAMICBIN" />
+                <ScalarProperty Name="BINLABEL" ColumnName="BINLABEL" />
+                <ScalarProperty Name="IS_SERIAL" ColumnName="IS_SERIAL" />
+                <ScalarProperty Name="UNITMEASUR" ColumnName="UNITMEASUR" />
+                <ScalarProperty Name="DESCRIPT" ColumnName="DESCRIPT" />
+                <ScalarProperty Name="ITEMTYPE" ColumnName="ITEMTYPE" />
+                <ScalarProperty Name="PRODUCT" ColumnName="PRODUCT" />
+                <ScalarProperty Name="ROWID" ColumnName="ROWID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PASSWORD">
+            <EntityTypeMapping TypeName="HJWarehouseModel.PASSWORD">
+              <MappingFragment StoreEntitySet="PASSWORD">
+                <ScalarProperty Name="PRNTR_PROD" ColumnName="PRNTR_PROD" />
+                <ScalarProperty Name="PRNTR_BIN" ColumnName="PRNTR_BIN" />
+                <ScalarProperty Name="LOCATION" ColumnName="LOCATION" />
+                <ScalarProperty Name="COMPUTER" ColumnName="COMPUTER" />
+                <ScalarProperty Name="RFTERMID" ColumnName="RFTERMID" />
+                <ScalarProperty Name="CUST_NUM" ColumnName="CUST_NUM" />
+                <ScalarProperty Name="USER_LANG" ColumnName="USER_LANG" />
+                <ScalarProperty Name="PRNTR_PACK" ColumnName="PRNTR_PACK" />
+                <ScalarProperty Name="PRNTR_SHIP" ColumnName="PRNTR_SHIP" />
+                <ScalarProperty Name="PRNTR_RECV" ColumnName="PRNTR_RECV" />
+                <ScalarProperty Name="PRNTR_PICK" ColumnName="PRNTR_PICK" />
+                <ScalarProperty Name="SECURITY" ColumnName="SECURITY" />
+                <ScalarProperty Name="TENANTID" ColumnName="TENANTID" />
+                <ScalarProperty Name="CLIENTNAME" ColumnName="CLIENTNAME" />
+                <ScalarProperty Name="PRIVILEGE" ColumnName="PRIVILEGE" />
+                <ScalarProperty Name="PASSWORD1" ColumnName="PASSWORD" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ISADMIN" ColumnName="ISADMIN" />
+                <ScalarProperty Name="ROWID" ColumnName="ROWID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

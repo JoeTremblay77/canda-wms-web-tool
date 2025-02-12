@@ -1,0 +1,60 @@
+﻿@model CandaWebUtility.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Create User Account";
+}
+
+@using (Html.BeginForm("Create", "UsersAdmin", FormMethod.Post, new { @class = "form-horizontal", role = "form", autocomplete = "off" }))
+{
+    @Html.AntiForgeryToken()
+
+    <h4>Create User Account</h4>
+    <p>An account confirmation email will be sent when Create is clicked. The confirmation expires in 60 minutes.</p>
+
+    @Html.ValidationSummary("", new { @class = "text-error" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email, new { @class = "col-md-3 control-label" })
+        <div class="col-md-9">
+            <input id="Email" class="form-control highlight-changes" type="email" value="" name="Email" data-val-email="The Email field is not a valid e-mail address." data-val="true" autocomplete="off">
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.FullName, new { @class = "col-md-3 control-label" })
+        <div class="col-md-9">
+            @Html.TextBoxFor(model => model.FullName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.FullName)
+        </div>
+    </div>
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.UserType, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                <select class="form-control" name="UserType">
+                    @foreach (var item in Model.UserTypes)
+                    {
+                        <option @if (item == Model.UserType) { <text> selected </text>              }>@item</option>
+                    }
+                </select>
+                @Html.ValidationMessageFor(model => model.UserType)
+            </div>
+        </div>*@
+
+    <div class="form-group">
+        <label class="col-md-3 control-label">
+            Select User Role
+        </label>
+        @foreach (var item in (SelectList)ViewBag.RoleId)
+        {    <div class="col-md-10">
+            <input type="checkbox" name="SelectedRoles" value="@item.Value" class="checkbox-inline" />
+            @Html.Label(item.Value, new { @class = "control-label" })
+        </div>
+        }
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-3">
+            <input type="submit" class="btn btn-default" value="Create" />
+        </div>
+    </div>
+}

@@ -1,0 +1,35 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+@{
+    ViewBag.Title = "Error";
+}
+<h3>System Error</h3>
+<h4>
+    An error occurred while processing your request. <br />
+    Please contact your System Administrator.
+</h4>
+
+@if (DeploymentState.IsDebug)
+{
+    <div>
+        <br />
+        <span class="text-error">
+            @ViewBag.errorMessage
+        </span>
+        <br />
+        <br />
+        @if (Model != null)
+        {
+            if (Model.Exception != null)
+            {
+                <span class="text-error">
+                    @Model.Exception.Message
+                </span>
+                <br />
+                <br />
+                <span class="text-error">
+                    @Model.Exception.StackTrace
+                </span>
+            }
+        }
+    </div>
+}

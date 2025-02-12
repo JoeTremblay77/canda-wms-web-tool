@@ -1,0 +1,48 @@
+﻿@model CandaWebUtility.Data.Settings
+
+@{
+    ViewBag.Title = "Delete Settings";
+}
+
+<div class="content-wrapper">
+
+<h4>@ViewBag.Title</h4>
+
+
+  
+ <table class="table-condensed">
+        @Html.HiddenFor(model => model.SettingId)
+<tr>
+        <td>
+          @Html.LabelFor(model => model.SettingName, new { @class = "col-md-2 control-label" })
+        </td>
+        <td>
+          @Html.TextBoxFor(model => model.SettingName, new { @class = "form-control",  @disabled ="true" })
+        </td>
+</tr>
+<tr>
+        <td>
+          @Html.LabelFor(model => model.SettingValue, new { @class = "col-md-2 control-label" })
+        </td>
+        <td>
+          @Html.TextBoxFor(model => model.SettingValue, new { @class = "form-control",  @disabled ="true" })
+        </td>
+</tr>
+  </table>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" />
+
+
+        </div>
+    }
+
+</div>
+
+<div class="back-to-list-wrapper">
+    @Html.ActionLink("Back to List", "Index")
+</div>
+

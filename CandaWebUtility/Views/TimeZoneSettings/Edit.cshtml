@@ -1,0 +1,43 @@
+﻿@model CandaWebUtility.Data.TimeZoneSetting
+
+@{
+    ViewBag.Title = "Edit TimeZoneSetting";
+}
+<div class="content-wrapper">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4> Edit TimeZoneSetting</h4>
+
+            @Html.ValidationSummary(DeploymentState.IsRelease)
+
+            @Html.HiddenFor(model => model.SettingId)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TimeZoneId, new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    <select class="form-control" style="width:440px;font-size:1em;" name="TimeZoneId">
+                        @foreach (var item in Model.TimeZones)
+                        {
+                            <option @if (item == Model.TimeZoneId) { <text> selected </text>                             }>@item</option>
+                        }
+                    </select>
+                    @Html.ValidationMessageFor(model => model.TimeZoneId)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>

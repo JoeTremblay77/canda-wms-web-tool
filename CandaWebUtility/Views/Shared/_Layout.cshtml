@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - MVC Web Application</title>
+    @Styles.Render("~/content/css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+
+
+</head>
+@using Microsoft.AspNet.Identity
+<body>
+    <div class="navbar navbar-default">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <a href="@Url.Action("Index", "Home")">
+                <img src="@Url.Content("~/" + CacheBusterSuffix.ContentsSuffix + "/logo.png")" class="logo-image" alt="logo" />
+            </a>
+
+            @if(Session[CandaWebUtility.HighJumpUser.ID] != null)
+            {
+                <span>@Session[CandaWebUtility.HighJumpUser.ID].ToString()</span>
+            }
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+
+                <li class="top-menu-item">@Html.ActionLink("High Jump Utility", "Index", "HighJumpUtility")</li>
+
+                @*@if (Request.IsAuthenticated)
+                {
+                    if (User.IsInRole(ApplicationRoles.Admin))
+                    {
+                        <li class="dropdown top-menu-item  no-left-border">
+                            <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" id="dropdownMenuAdmin">
+                                Admin
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuAdmin">
+                                <li>@Html.ActionLink("Manage Users", "Index", "UsersAdmin")</li>
+                                <li role="separator" class="divider"></li>
+                                <li>@Html.ActionLink("Admin Home", "Index", "Admin")</li>
+                            </ul>
+                        </li>
+                    }
+                }*@
+            </ul>
+
+            @Html.Partial("_LoginPartial")
+        </div>
+
+    </div>
+
+    <noscript>
+        <style type="text/css">
+            .body-content {
+                display: none;
+            }
+        </style>
+        <div class="container">
+            <div class="text-info">
+                <h4>You don't have javascript enabled.  This site requires it to function.</h4>
+            </div>
+        </div>
+    </noscript>
+
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+    <footer style="text-align:center;">
+        @if (DeploymentState.IsDebug)
+        {
+            <div style="color:firebrick;font-size:0.7em; width:80%; margin:auto;margin-top:100px;">DEBUG BUILD  @ViewContext.Controller.GetType().Assembly.GetName().Version<br />@File.GetLastWriteTime(ViewContext.Controller.GetType().Assembly.Location)</div>
+        }
+    </footer>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

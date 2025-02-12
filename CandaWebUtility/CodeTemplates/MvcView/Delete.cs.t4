@@ -1,0 +1,129 @@
+﻿<#@ template language="C#" HostSpecific="True" #>
+<#@ output extension=".cshtml" #>
+<#@ include file="Imports.include.t4" #>
+@model <#= ViewDataTypeName #>
+<#
+// The following chained if-statement outputs the file header code and markup for a partial view, a view using a layout page, or a regular view.
+if(IsPartialView) {
+#>
+
+<#
+} else if(IsLayoutPageSelected) {
+#>
+
+<#
+if (!String.IsNullOrEmpty(LayoutPageFile)) {
+#>
+    Layout = "<#= LayoutPageFile#>";
+<#
+}
+#>
+@{
+    ViewBag.Title = "Delete <#= ViewDataTypeShortName #>";
+}
+<#
+} else {
+#>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title><#= ViewName #></title>
+</head>
+<body>
+<#
+    PushIndent("    ");
+}
+#>
+
+<div class="content-wrapper">
+
+<h4>@ViewBag.Title</h4>
+
+
+  
+ <table class="table-condensed">
+<#
+foreach (PropertyMetadata property in ModelMetadata.Properties) {
+
+        if (property.IsPrimaryKey) {
+#>
+        @Html.HiddenFor(model => model.<#= property.PropertyName #>)
+<#
+}
+
+    if (property.Scaffold && !property.IsPrimaryKey && !property.IsForeignKey) {
+#>
+<#
+        // This is a temporary work around until core scaffolding provides support for independent associations.
+        if (property.IsAssociation && GetRelatedModelMetadata(property) == null) {
+            continue;
+        }
+
+		if (property.PropertyName=="RowVersion") {
+continue;
+}
+
+if (property.PropertyName=="DateCreated") {
+continue;
+}
+
+if (property.PropertyName=="DateModified") {
+continue;
+}
+
+if (property.PropertyName=="UserModified") {
+continue;
+}
+
+if (property.PropertyName=="UserCreated") {
+continue;
+}
+
+#>
+<tr>
+        <td>
+          @Html.LabelFor(model => model.<#= property.PropertyName #>, new { @class = "col-md-2 control-label" })
+        </td>
+        <td>
+          @Html.TextBoxFor(model => model.<#= property.PropertyName #>, new { @class = "form-control",  @disabled ="true" })
+        </td>
+</tr>
+<#
+    }
+}
+#>
+  </table>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" />
+
+
+        </div>
+    }
+
+</div>
+
+<div class="back-to-list-wrapper">
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<#
+// The following code closes the tag used in the case of a view using a layout page and the body and html tags in the case of a regular view page
+#>
+<#
+if(!IsPartialView && !IsLayoutPageSelected) {
+    ClearIndent();
+#>
+</body>
+</html>
+<#
+}
+#>
+<#@ include file="ModelMetadataFunctions.cs.include.t4" #>

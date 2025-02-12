@@ -1,0 +1,62 @@
+﻿@model CandaWebUtility.Models.UploadFileModel
+@{
+    string fileInputId = "file-" + Model.FormId;
+}
+<div>
+
+    <form id="@Model.FormId">
+        <div class="col-md-7">
+            <input type="file" name="file" class="form-control imageuploader" id="@fileInputId" accept="*.*" multiple />
+        </div>
+
+        <div class="col-md-5">
+            @Html.Hidden("ParentId", Model.ProjectId)
+            @Html.Hidden("DivId", Model.DivId)
+        </div>
+    </form>
+
+    <script>
+
+        $('#@fileInputId').on('change', function (e) {
+            var files = e.target.files;
+
+            if (files.length > 0) {
+                if (window.FormData !== undefined) {
+
+                    var form = document.getElementById('@Model.FormId');
+                    var formData = new FormData(form);
+
+
+                    $.ajax({
+                        type: "POST",
+                        url: '/UploadFile/UploadFileAjax',
+                        contentType: false,
+                        processData: false,
+                        data: formData,
+                        success: function (response) {
+
+                            $('#@fileInputId').val("");
+
+                            var url = "/Projects/UploadFileList/@Model.ProjectId.ToString()?divid=@Model.DivId&timestamp=" + new Date().getTime();
+
+                            $("#@Model.DivId").load(url);
+                        },
+                        error: function (xhr, status, p3, p4) {
+                            var err = "Error " + " " + status + " " + p3 + " " + p4;
+                            if (xhr.responseText && xhr.responseText[0] == "{")
+                                err = JSON.parse(xhr.responseText).Message;
+                            console.log(err);
+                        }
+
+
+
+
+                    });
+                } else {
+                    alert("This browser doesn't support HTML5 file uploads.");
+                }
+            }
+
+        });
+    </script>
+</div>

@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Admin";
+}
+
+
+
+    <div class="row">
+
+        @if (User.IsInRole(ApplicationRoles.Admin))
+        {
+            <div class="blob">
+                <h4>Users</h4>
+                <p>@Html.ActionLink("Manage Users", "Index", "UsersAdmin")</p>
+            </div>
+
+            <div class="blob">
+                <h4>Email</h4>
+                <p>@Html.ActionLink("Account Email SMTP", "Index", "AccountEmailSMTP")</p>
+            </div>
+
+            <div class="blob">
+                <h4>Error Log</h4>
+                <p>@Html.ActionLink("View", "Index", "ErrorLogs")</p>
+            </div>
+
+            <div class="blob">
+                <h4>Settings</h4>
+                <p>@Html.ActionLink("Time Zone", "Index", "TimeZoneSettings")</p>
+                <p>@Html.ActionLink("Settings", "Index", "Settings")</p>
+            </div>
+
+
+        }
+    </div>
+
+

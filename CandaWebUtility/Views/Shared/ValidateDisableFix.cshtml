@@ -1,0 +1,7 @@
+﻿<script type="text/javascript">
+    $('.form-control').keyup(function () {
+        if ($(this).val() != '') {
+            $(':input[type="submit"]').prop('disabled', false);
+        }
+    });
+</script>

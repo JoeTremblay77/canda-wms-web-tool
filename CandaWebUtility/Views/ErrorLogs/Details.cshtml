@@ -1,0 +1,64 @@
+﻿@model CandaWebUtility.Data.ErrorLog
+
+@{
+    ViewBag.Title = "Details ErrorLog";
+}
+
+<div class="content-wrapper">
+    <h4>Details : ErrorLog</h4>
+    <hr />
+    <table cellpadding="5" cellspacing="5">
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.UserName, new { @class = "col-md-2 control-label" })
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @disabled = "true" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.DateCreated, new { @class = "col-md-2 control-label" })
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.DateCreated, new { @class = "form-control", @disabled = "true" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.Severity, new { @class = "col-md-2 control-label" })
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.Severity, new { @class = "form-control", @disabled = "true" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.ErrorMessage, new { @class = "col-md-2 control-label" })
+            </td>
+            <td style="border-radius:4px;border:1px solid #ddd;padding:20px;">
+                @Model.ErrorMessage
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.StackTrace, new { @class = "col-md-2 control-label" })
+            </td>
+            <td style="border-radius:4px;border:1px solid #ddd;padding:20px;">
+                @Model.StackTrace
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.Sent, new { @class = "col-md-2 control-label" })
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.Sent, new { @class = "form-control", @disabled = "true" })
+            </td>
+        </tr>
+    </table>
+</div>
+<p>
+
+    @Html.ActionLink("Back to List", "Index")
+</p>

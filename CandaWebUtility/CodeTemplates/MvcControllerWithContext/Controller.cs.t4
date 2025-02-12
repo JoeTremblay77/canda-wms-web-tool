@@ -1,0 +1,311 @@
+﻿<#@ template language="C#" HostSpecific="True" Debug="True" #>
+<#@ output extension="cs" #>
+<#@ assembly name="System.ComponentModel.DataAnnotations" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data.Entity" #>
+<#@ assembly name="System.Data.Linq" #>
+<#@ assembly name="EnvDTE" #>
+<#@ ScaffoldingAssembly Processor="ScaffoldingAssemblyLoader" #>
+<#
+var routePrefix = String.Empty;
+if (!String.IsNullOrWhiteSpace(AreaName)) {
+    routePrefix = "/" + AreaName;
+}
+routePrefix += "/" + ControllerRootName + "/";
+#>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="Microsoft.AspNet.Scaffolding.Core.Metadata" #>
+<#@ parameter type="System.String" name="ControllerName" #>
+<#@ parameter type="System.String" name="ControllerRootName" #>
+<#@ parameter type="System.String" name="Namespace" #>
+<#@ parameter type="System.String" name="AreaName" #>
+<#@ parameter type="System.String" name="ContextTypeName" #>
+<#@ parameter type="System.String" name="ModelTypeName" #>
+<#@ parameter type="System.String" name="ModelVariable" #>
+<#@ parameter type="Microsoft.AspNet.Scaffolding.Core.Metadata.ModelMetadata" name="ModelMetadata" #>
+<#@ parameter type="System.Boolean" name="UseAsync" #>
+<#@ parameter type="System.Boolean" name="IsOverpostingProtectionRequired" #>
+<#@ parameter type="System.String" name="BindAttributeIncludeText" #>
+<#@ parameter type="System.String" name ="OverpostingWarningMessage" #>
+<#@ parameter type="System.Collections.Generic.HashSet<System.String>" name="RequiredNamespaces" #>
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+<# if (UseAsync) { #>
+using System.Threading.Tasks;
+<# } #>
+using System.Net;
+using System.Web;
+using System.Web.Mvc;
+using System.Data.Entity.Infrastructure;
+<# foreach (var namespaceName in RequiredNamespaces) { #>
+using <#= namespaceName #>;
+<# } #>
+
+namespace <#= Namespace #>
+{
+<#
+    var contextTypeName = ContextTypeName;
+    var entitySetName = ModelMetadata.EntitySetName;
+    var entitySetVariable = entitySetName.ToLowerInvariant();
+    var primaryKeyName = ModelMetadata.PrimaryKeys[0].PropertyName;
+    var primaryKeyShortTypeName = ModelMetadata.PrimaryKeys[0].ShortTypeName;
+    var primaryKeyDefaultValue = ModelMetadata.PrimaryKeys[0].DefaultValue;
+    var primaryKeyType = ModelMetadata.PrimaryKeys[0].TypeName;
+    var primaryKeyNullableTypeName = GetNullableTypeName(primaryKeyType, primaryKeyShortTypeName);
+    var lambdaVar = ModelVariable[0];
+    var relatedProperties = ModelMetadata.RelatedEntities.ToDictionary(item => item.AssociationPropertyName);
+
+
+#>
+[Authorize(Roles = ApplicationRoles.Admin)]
+    public class <#= ControllerName #> : Controller
+    {
+        private <#= ContextTypeName #> db = new <#= ContextTypeName #>();
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(<#= ModelTypeName #> model)
+		{
+                if (ModelState.IsValid)
+                {
+
+				try
+				{
+<# if(!String.IsNullOrEmpty(primaryKeyType) && String.Equals("System.Guid", primaryKeyType, StringComparison.OrdinalIgnoreCase)) { #>
+                model.<#= primaryKeyName #> = Guid.NewGuid();            
+<# } #>
+
+
+
+                db.<#= entitySetName #>.Add(model);
+
+                db.SaveChanges();
+
+                return RedirectToAction("Index");
+
+				        }
+                catch(Exception ex)
+                {
+     
+
+					       return View("Error", LogManager.HandleUIException(User.Identity.Name, ex, ErrorSeverity.Level1));
+
+                }
+            }
+            return View(model);
+		}
+
+        [HttpGet]
+        public ActionResult Delete(<#= primaryKeyNullableTypeName #> id)
+        {
+            if (id == null)
+            {               
+                    return RedirectToAction("Index");
+            }
+
+            <#= ModelTypeName #> <#= ModelVariable #> = db.<#= entitySetName #>.Find(id);
+
+            if (<#= ModelVariable #> == null)
+            {
+                   ViewBag.ErrorMsg = ViewText.RecordNotFound;
+                    return RedirectToAction("Index");
+            }
+            return View(<#= ModelVariable #>);
+        }
+    
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(<#= primaryKeyShortTypeName #> id)
+        {
+		     try
+            {
+            <#= ModelTypeName #> <#= ModelVariable #> = db.<#= entitySetName #>.Find(id);
+
+			            if (<#= ModelVariable #>== null)
+            {
+                ViewBag.ErrorMsg = ViewText.RecordNotFound;
+                return RedirectToAction("Index");
+            }
+
+            db.<#= entitySetName #>.Remove(<#= ModelVariable #>);
+
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+ return View("Error", LogManager.HandleUIException(User.Identity.Name, ex, ErrorSeverity.Level2));
+            }
+        }
+
+        [HttpGet]		
+        public ActionResult Edit(<#= primaryKeyNullableTypeName #> id)
+        {
+            if (id == null)
+            {			
+                 return RedirectToAction("Index");
+            }
+
+            try
+            {
+                 var model = db.<#= entitySetName #>.AsNoTracking().Where(m => m.<#= primaryKeyName #> == id).FirstOrDefault();
+
+                 if (model == null)
+                 {
+                      ViewBag.ErrorMsg = ViewText.RecordNotFound;
+                      return RedirectToAction("Index");
+                 }
+
+       
+
+                 return View(model);
+
+			 }
+            catch (DbUpdateException ex)
+            {
+                LogManager.LogUIException(User.Identity.Name, ex, ErrorSeverity.Level1);
+                ViewBag.ErrorMsg = ViewText.TryAgainToEdit;
+            }
+            catch (RetryLimitExceededException ex)
+            {
+                LogManager.LogUIException(User.Identity.Name, ex, ErrorSeverity.Level1);
+                ViewBag.ErrorMsg = ViewText.TryAgainToEdit;
+            }
+            catch (System.Data.Entity.Core.EntityException ex)
+            {
+                LogManager.LogUIException(User.Identity.Name, ex, ErrorSeverity.Level1);
+                ViewBag.ErrorMsg = ViewText.TryAgainToEdit;
+            }
+            catch (System.Data.DataException ex)
+            {
+     return View("Error", LogManager.HandleUIException(User.Identity.Name, ex, ErrorSeverity.Level2));
+            }
+            catch (Exception ex)
+            {
+            return View("Error", LogManager.HandleUIException(User.Identity.Name, ex, ErrorSeverity.Level2));
+            }
+          return RedirectToAction("Index");
+        }     
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(<#= ModelTypeName #> model)
+        {
+            if (ModelState.IsValid)
+            {
+			try
+			{
+                <#= entitySetName #> edit = db.<#= entitySetName #>.Where(m => m.<#= primaryKeyName #> == model.<#= primaryKeyName #>).FirstOrDefault();
+
+                if (edit == null)
+                {
+                        ModelState.AddModelError(string.Empty, ViewText.RecordDeleted);
+                        return View(model);
+                }
+
+				//  save changes
+ 
+                db.Entry(edit).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();         
+
+                  return RedirectToAction("Edit", new { id = model.<#= primaryKeyName #> } );
+
+			}  
+                catch (DbUpdateException ex)
+                {
+                    LogManager.LogUIException(User.Identity.Name, ex, ErrorSeverity.Level1);
+                    ModelState.AddModelError(string.Empty, ViewText.TryAgainToSave);
+                }
+                catch (RetryLimitExceededException ex)
+                {
+                    LogManager.LogUIException(User.Identity.Name, ex, ErrorSeverity.Level1);
+                    ModelState.AddModelError(string.Empty, ViewText.TryAgainToSave);
+                }
+                catch (System.Data.Entity.Core.EntityException ex)
+                {
+                    LogManager.LogUIException(User.Identity.Name, ex, ErrorSeverity.Level1);
+                    ModelState.AddModelError(string.Empty, ViewText.TryAgainToSave);
+                }
+                catch (System.Data.DataException ex)
+                {
+           return View("Error", LogManager.HandleUIException(User.Identity.Name, ex, ErrorSeverity.Level2));
+                }
+                catch (Exception ex)
+                {
+     return View("Error", LogManager.HandleUIException(User.Identity.Name, ex, ErrorSeverity.Level2));
+                }
+            }
+		
+            return View(model);
+        }    
+
+        [HttpGet]        
+        public ActionResult Index()
+        {
+		           try
+            {
+		           var list = db.<#= entitySetName #>.AsNoTracking().OrderBy(b => b.Name).ToList();
+
+
+             //   ViewBag.ParentId = id.Value;
+                return View(list);
+            }
+            catch (Exception ex)
+            {
+                return View("Error", LogManager.HandleUIException(User.Identity.Name, ex, ErrorSeverity.Level1));
+            }       
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+    }
+
+
+}
+
+
+
+<#+
+// This function converts the primary key short type name to its nullable equivalent when possible. This is required to make
+// sure that an HTTP 400 error is thrown when the user tries to access the edit, delete, or details action with null values.
+    string GetNullableTypeName(string typeName, string shortTypeName)
+    {
+        // The exceptions are caught because if for any reason the type is user defined, then the short type name will be used.
+        // In that case the user will receive a server error if null is passed to the edit, delete, or details actions.
+        Type primaryKeyType = null;
+        try
+        {
+            primaryKeyType = Type.GetType(typeName);
+        }
+        catch
+        {
+        }
+        if (primaryKeyType != null && (primaryKeyType.IsPrimitive || IsGuid(typeName)))
+        {
+            return shortTypeName + "?";
+        }
+        return shortTypeName;
+    }
+
+    bool IsGuid(string typeName) {
+        return String.Equals("System.Guid", typeName, StringComparison.OrdinalIgnoreCase);
+    }
+#>

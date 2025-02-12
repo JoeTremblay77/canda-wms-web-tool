@@ -1,0 +1,64 @@
+﻿@model CandaWebUtility.Data.AccountEmailSMTP
+
+@{
+    ViewBag.Title = "Delete EmailSetting";
+}
+<div class="content-wrapper">
+    <h4>Are you sure you want to delete this?</h4>
+
+    <h5>Email Setting</h5>
+
+    <table cellspacing="15" cellpadding="15">
+        @Html.HiddenFor(model => model.EmailSettingId)
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.FromEmailAddress, new { @class = "col-md-2 control-label" })
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.FromEmailAddress, new { @class = "form-control", @disabled = "true" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.Host, new { @class = "col-md-2 control-label" })
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.Host, new { @class = "form-control", @disabled = "true" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.UserName, new { @class = "col-md-2 control-label" })
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @disabled = "true" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.Password, new { @class = "col-md-2 control-label" })
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.Password, new { @class = "form-control", @disabled = "true" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.Port, new { @class = "col-md-2 control-label" })
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.Port, new { @class = "form-control", @disabled = "true" })
+            </td>
+        </tr>
+    </table>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

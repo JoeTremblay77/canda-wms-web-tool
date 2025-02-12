@@ -1,0 +1,102 @@
+﻿@model CandaWebUtility.Models.HighJumpMoveBinLabel
+
+@{
+    ViewBag.Title = "Move";
+}
+
+<span>Select Destination Lot#, Qty, and Expiry</span>
+@using (Html.BeginForm("Move", "HighJumpUtility", FormMethod.Post, new { @class = "form-horizontal", autocomplete = "off" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(m => m.Lot)
+    @Html.HiddenFor(m => m.Quantity)
+    @Html.HiddenFor(m => m.RowID)
+
+
+        <div class="form-group">
+            @Html.Label(Model.Warning, new { @class = "control-label col-md-4", style = "color:#ff0000" })
+        </div>
+    
+
+    <div class="form-group">
+        @*@Html.Label("Product", new { @class = "control-label col-md-4" })*@
+        <div class="col-md-8">
+            @Html.TextBoxFor(model => model.Product, new { @class = "form-control", @readonly = "true" })
+        </div>
+    </div>
+
+        <div class="form-group">
+        @*@Html.Label("Product", new { @class = "control-label col-md-4" })*@
+        <div class="col-md-8">
+            @Html.TextBoxFor(model => model.NewLot, new { @class = "form-control" })
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        @*@Html.Label("Bin Label", new { @class = "control-label col-md-4" })*@
+        <div class="col-md-8">
+            @Html.TextBoxFor(model => model.BinLabel, new { @class = "form-control", @readonly = "true" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @*@Html.Label("Quantity", new { @class = "control-label col-md-4" })*@
+        <div class="col-md-8">
+            <input type="text" id="NewQuantity" name="NewQuantity" class="form-control highlight-changes" value=@Model.NewQuantity />
+        </div>
+    </div>
+
+    <input id="ExpiryDate" name="ExpiryDate" class="form-control highlight-changes" data-provide="datepicker" data-date-format="D M d yyyy" readonly="readonly" value="@Model.ExpiryDate.ToString("ddd MMM d yyyy")" />
+
+    <div class="form-group">
+        <div class="col-md-12">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+}
+<script type="text/javascript">
+
+    $('#ExpiryDate').on('change', function () {
+        $('.datepicker').hide();
+    });
+
+
+        $('#datepicker1').on('change', function () {
+            $('.datepicker').hide();
+        });
+
+        $('.highlight-changes').change(function (event) {
+            $(this).css("background-color", "@Defaults.ValueChangedBackground");
+        });
+
+        // number inputs
+        jQuery(function ($) {
+            $('#currency-test').autoNumeric("init", {
+                aSep: ',',
+                aDec: '.',
+                aSign: '$',
+                vMin: '0.00',
+                vMax: '999999999.99'
+            });
+
+            $('#NewQuantity').autoNumeric("init", {
+                aSep: '',
+                aDec: '.',
+                aSign: '',
+                vMin: '0',
+                vMax: '9999'
+            });
+
+            $('#no-decimal').autoNumeric("init", {
+                aSep: '',
+                aDec: '.',
+                aSign: '',
+                vMin: '0',
+                vMax: '9999'
+            });
+        });
+        // end of number inputs
+</script>

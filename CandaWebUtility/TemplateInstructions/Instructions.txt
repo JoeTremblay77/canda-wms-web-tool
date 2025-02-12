@@ -1,0 +1,21 @@
+Installation Instructions:
+--------------------------
+1. Use the Template to create a new project
+2. Restore the database backup WebUtility.bak with a new name. 
+3. Change the web.config connection strings to point to the new database name (if using a database named differently than the project name)
+4. Change the properties of the project (the small properties accessed by clicking on project then properties) to SSL Enabled True
+5. Copy the https address and paste it in the project properties project URL
+6. Create the virtual directory by clicking on the button next to the project URL
+7. Update and validate the data model
+8. Start the project
+9. Log in with the default user
+	username: krhodes@jdpraxis.com
+	password: 748IXAPKixa*/!pBGLE1
+10. Create a user for yourself
+
+Notes:
+------
+The template is set up to use database first EF connections.
+The EF initialization has already occurred.
+The template has working email SMTP through contactus@jdpraxis.com
+There are 2 types of users defined

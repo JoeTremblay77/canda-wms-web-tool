@@ -1,0 +1,115 @@
+﻿@model CandaWebUtility.Models.HighJumpUtilitySearch
+@using GridMvc.Html
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+@using (Html.BeginForm("Search", "HighJumpUtility", FormMethod.Post, new { @class = "form-horizontal", autocomplete = "off" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <div class="col-md-8">
+            @Html.TextBoxFor(model => model.ProductSearchText, new { @class = "form-control", @placeholder = "Product" })
+            @Html.ValidationMessageFor(model => model.ProductSearchText)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-8">
+            @Html.TextBoxFor(model => model.LotSearchText, new { @class = "form-control", @placeholder = "Lot" })
+            @Html.ValidationMessageFor(model => model.LotSearchText)
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-md-12">
+            <input type="submit" value="Search" class="btn btn-default" />
+        </div>
+    </div>
+
+        
+}
+
+@using (Html.BeginForm("ChangeAllExpiryDates", "HighJumpUtility", FormMethod.Post, new { @class = "form-horizontal", autocomplete = "off" }))
+{
+    @Html.HiddenFor(m => m.ProductSearchText)
+    @Html.HiddenFor(m => m.LotSearchText)
+
+
+<div class="grid-container">
+    @Html.Grid(Model.ResultList).Columns(columns =>
+{
+    columns.Add(c => c.Lot).Titled("Lot/Bin").Encoded(false).Sanitized(false).RenderValueAs(c => CustomRenderingOfLot(c));
+    columns.Add(c => c.Quantity).Titled("Qty").Encoded(false).Sanitized(false).RenderValueAs(c => CustomRenderingOfQuantity(c));
+    columns.Add(c => c.ExpiryDate).Titled("Expiry").Encoded(false).Sanitized(false).RenderValueAs(c => CustomRenderingOfExpiryDate(c));
+
+
+}).Sortable(true).Filterable(true).WithMultipleFilters()
+
+
+    @helper CustomRenderingOfExpiryDate(CandaWebUtility.Models.HighJumpUtilityBinLabel entry)
+    {
+        if (entry.ExpiryDate != null)
+        {
+            @entry.ExpiryDate.ToString("ddd MMM d yyyy");
+        }
+    }
+
+    @helper CustomRenderingOfLot(CandaWebUtility.Models.HighJumpUtilityBinLabel entry)
+    {
+        if (entry.ExpiryDate != null)
+        {
+            @Html.ActionLink(entry.Lot, "FilterByLot", "HighJumpUtility", new { ProductSearchText = Model.ProductSearchText, Lot = entry.Lot }, null);
+            <br />
+            @entry.BinLabel
+        }
+    }
+
+    @helper CustomRenderingOfQuantity(CandaWebUtility.Models.HighJumpUtilityBinLabel entry)
+    {
+        if (entry.ExpiryDate != null)
+        {
+            @entry.QuantityDisplay
+            <br />
+            @Html.ActionLink("Split", "Move", "HighJumpUtility", new { RowID = entry.RowID }, null);
+        }
+    }
+
+
+
+
+    @if (!string.IsNullOrWhiteSpace(Model.LotSearchText))
+    {
+        <input id="ExpiryDate" name="ExpiryDate" class="form-control highlight-changes" data-provide="datepicker" data-date-format="D M d yyyy" readonly="readonly" value="@Model.ExpiryDate.ToString("ddd MMM d yyyy")" />
+
+
+        <div class="form-group">
+            <div class="col-md-12">
+                <input type="submit" value="Change All Expiry Dates" class="btn btn-default" />
+            </div>
+        </div>
+    }
+
+</div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+
+        $('#ExpiryDate').on('change', function () {
+            $('.datepicker').hide();
+        });
+
+
+
+
+    </script>
+}
+

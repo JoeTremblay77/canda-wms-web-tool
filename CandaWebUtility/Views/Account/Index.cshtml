@@ -1,0 +1,17 @@
+﻿@model IEnumerable<CandaWebUtility.Models.RegisterViewModel>
+@{
+    ViewBag.Title = "Users";
+}
+
+<div>
+
+    <h2>Users</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Register")
+    </p>
+
+    @*<p>@Html.ActionLink("RolesAdmin", "Index", "RolesAdmin")</p>*@
+
+    <p>@Html.ActionLink("UsersAdmin", "Index", "UsersAdmin")</p>
+</div>

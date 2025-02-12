@@ -1,0 +1,90 @@
+﻿@model CandaWebUtility.Data.AccountEmailSMTP
+@{
+    ViewBag.Title = "Create Account Email SMTP";
+}
+
+<div class="content-wrapper">
+
+    @using (Html.BeginForm("Create", "AccountEmailSMTP", FormMethod.Post, new { @class = "form-horizontal", autocomplete = "off" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <h4>New : Account Email SMTP</h4>
+
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.Label("From Email Address", new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.FromEmailAddress, new { @class = "form-control", @type = "email" })
+                @Html.ValidationMessageFor(model => model.FromEmailAddress)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Host, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.Host, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Host)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserName, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.UserName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.Password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Port, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.Port, new { @class = "form-control no-decimal" })
+                @Html.ValidationMessageFor(model => model.Port)
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UseSSL, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.CheckBoxFor(model => model.UseSSL, new { @class = "form-control no-decimal" })
+                @Html.ValidationMessageFor(model => model.UseSSL)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-12">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    jQuery(function ($) {
+
+        $('.no-decimal').autoNumeric("init", {
+            aSep: '',
+            aDec: '.',
+            aSign: '',
+            vMin: '0',
+            vMax: '9999'
+        });
+    });
+</script>

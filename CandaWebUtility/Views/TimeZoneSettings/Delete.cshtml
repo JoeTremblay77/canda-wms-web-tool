@@ -1,0 +1,37 @@
+﻿@model CandaWebUtility.Data.TimeZoneSetting
+
+@{
+    ViewBag.Title = "Delete TimeZoneSetting";
+}
+
+<div class="content-wrapper">
+
+    <h4>Are you sure you want to delete this?</h4>
+    <div>
+        <h5>TimeZoneSetting</h5>
+
+        <table cellspacing="15" cellpadding="15">
+            @Html.HiddenFor(model => model.SettingId)
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.TimeZoneId, new { @class = "col-md-2 control-label" })
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.TimeZoneId, new { @class = "form-control", @disabled = "true" })
+                </td>
+            </tr>
+        </table>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" />
+            </div>
+        }
+    </div>
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>

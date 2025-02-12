@@ -1,0 +1,59 @@
+﻿@model CandaWebUtility.Data.Settings
+@{
+    ViewBag.Title = "Create Settings";
+}
+
+<div class="content-wrapper">
+
+@using (Html.BeginForm("Create", "Settings", FormMethod.Post, new { @class = "form-horizontal", autocomplete = "off" }))
+{
+    @Html.AntiForgeryToken()
+    
+
+        <h4>@ViewBag.Title</h4>
+     
+        @Html.ValidationSummary(DeploymentState.IsRelease)
+		
+    <div class="form-horizontal">
+
+
+
+
+     
+
+     
+
+ <div class="form-group">
+            @Html.LabelFor(model => model.SettingName, new { @class = "col-md-4 control-label" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.SettingName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.SettingName)
+            </div>
+        </div>
+
+     
+
+ <div class="form-group">
+            @Html.LabelFor(model => model.SettingValue, new { @class = "col-md-4 control-label" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.SettingValue, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.SettingValue)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-12">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+          </div>
+}
+
+
+</div>
+
+    <div class="back-to-list-wrapper">
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+@Html.Partial("ValidateDisableFix")
+

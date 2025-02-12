@@ -1,0 +1,29 @@
+﻿@model CandaWebUtility.Models.UploadFileModel
+
+@foreach (var item in Model.FileUploadList)
+{
+    <div class="row ajax-list-entry">
+
+        <div class="col-md-1">
+
+            @using (Ajax.BeginForm("UploadFileRemove", "Projects", new { id = item.FileUploadId, projectid = Model.ProjectId}
+                , new AjaxOptions { UpdateTargetId = Model.DivId, InsertionMode = InsertionMode.Replace }))
+            {
+
+                <button type="submit" class="btn-small-flat glyph-btn">
+                    <span class="glyphicon glyphicon-minus"></span>
+                </button>
+                @Html.Hidden("DivId", Model.DivId)
+
+            }
+        </div>
+
+        <br/>
+
+        <div class="col-md-3">
+            @Html.ActionLink(item.FileName, "GetUploadFile", "Projects", new { id = item.FileUploadId }, null)
+        </div>
+
+    </div>
+
+}

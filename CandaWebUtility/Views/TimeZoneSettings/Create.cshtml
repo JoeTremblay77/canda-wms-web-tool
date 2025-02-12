@@ -1,0 +1,40 @@
+﻿@model CandaWebUtility.Data.TimeZoneSetting
+@{
+    ViewBag.Title = "Create Time Zone Setting";
+}
+
+<div class="content-wrapper">
+
+    @using (Html.BeginForm("Create", "TimeZoneSettings", FormMethod.Post, new { @class = "form-horizontal", autocomplete = "off" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <h4>New : Time Zone Setting</h4>
+
+        @Html.ValidationSummary(DeploymentState.IsRelease)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TimeZoneId, new { @class = "col-md-3 control-label" })
+            <div class="col-md-9">
+                <select class="form-control" style="width:440px;font-size:1em;" name="TimeZoneId">
+                    @foreach (var item in Model.TimeZones)
+                    {
+                        <option @if (item == Model.TimeZoneId) { <text> selected </text>                           }>@item</option>
+                    }
+                </select>
+                @Html.ValidationMessageFor(model => model.TimeZoneId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-12">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>

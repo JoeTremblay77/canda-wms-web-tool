@@ -1,0 +1,207 @@
+﻿<#@ template language="C#" HostSpecific="True" #>
+<#@ output extension=".cshtml" #>
+<#@ include file="Imports.include.t4" #>
+@model <#= ViewDataTypeName #>
+<#
+// The following chained if-statement outputs the file header code and markup for a partial view, a view using a layout page, or a regular view.
+if(IsPartialView) {
+#>
+
+<#
+} else if(IsLayoutPageSelected) {
+#>
+
+@{
+     ViewBag.Title = "Edit <#= ViewDataTypeShortName #>";
+<#
+if (!String.IsNullOrEmpty(LayoutPageFile)) {
+#>
+    Layout = "<#= LayoutPageFile#>";
+<#
+}
+#>
+}
+
+<#
+} else {
+#>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title><#= ViewName #></title>
+</head>
+<body>
+<#
+    PushIndent("    ");
+}
+#>
+<#
+if (ReferenceScriptLibraries) {
+#>
+<#
+    if (!IsLayoutPageSelected && IsBundleConfigPresent) {
+#>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+
+<#
+    }
+#>
+<#
+    else if (!IsLayoutPageSelected) {
+#>
+
+
+<#
+    }
+#>
+
+<#
+}
+#>
+
+<div class="content-wrapper">
+
+    @using (Html.BeginForm("Edit", "<#= ViewDataTypeShortName #>s", FormMethod.Post, new { @class = "form-horizontal", autocomplete = "off" }))
+{
+    @Html.AntiForgeryToken()
+     
+
+
+            <div class="row form-header">
+                <div class="col-md-4">
+                    <h4>@ViewBag.Title</h4>
+                </div>
+				  </div>
+
+         
+
+
+		 <div class="row">
+     
+	     <div class="form-horizontal">
+        @Html.ValidationSummary(DeploymentState.IsRelease)
+
+<#
+
+foreach (PropertyMetadata property in ModelMetadata.Properties) {
+    if (property.Scaffold && !property.IsAssociation) {
+
+if (property.PropertyName=="RowVersion") {
+continue;
+}
+
+if (property.PropertyName=="CreatedOn") {
+continue;
+}
+
+if (property.PropertyName=="ModifiedOn") {
+continue;
+}
+
+if (property.PropertyName=="ModifiedBy") {
+continue;
+}
+
+if (property.PropertyName=="CreatedBy") {
+continue;
+}
+
+        if (property.IsPrimaryKey) {
+#>
+        @Html.HiddenFor(model => model.<#= property.PropertyName #>)
+
+<#
+        } else if (!property.IsReadOnly) {
+#>
+        <div class="form-group">
+<#
+            if (property.IsForeignKey) {
+#>
+            @Html.LabelFor(model => model.<#= property.PropertyName #>, "<#= GetAssociationName(property) #>", new { @class = "control-label col-md-4" })
+<#
+            } else {
+#>
+            @Html.LabelFor(model => model.<#= property.PropertyName #>, new { @class = "control-label col-md-4" })
+<#
+            }
+#>
+            <div class="col-md-8">
+<#
+            if (property.IsForeignKey) {
+#>
+                @Html.DropDownList("<#= property.PropertyName #>", String.Empty)
+<#
+            } else {
+#>
+                @Html.TextBoxFor(model => model.<#= property.PropertyName #>, new { @class = "form-control" })
+<#
+            }
+#>
+                @Html.ValidationMessageFor(model => model.<#= property.PropertyName #>)
+            </div>
+        </div>
+
+<#
+        }
+	
+    }
+}
+#>
+        <div class="form-group">
+            <div class="col-md-12">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+	</div>
+	      </div>
+
+
+	
+
+      
+}
+
+
+</div>
+
+    <div class="back-to-list-wrapper">
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+@Html.Partial("ValidateDisableFix")
+
+<#
+if(IsLayoutPageSelected && ReferenceScriptLibraries && IsBundleConfigPresent) {
+#>
+
+<#
+}
+#>
+<#
+else if(IsLayoutPageSelected && ReferenceScriptLibraries) {
+#>
+
+
+<#
+}
+#>
+<#
+// The following code closes the tag used in the case of a view using a layout page and the body and html tags in the case of a regular view page
+#>
+<#
+if(!IsPartialView && !IsLayoutPageSelected) {
+    ClearIndent();
+#>
+</body>
+</html>
+<#
+}
+#>
+<#@ include file="ModelMetadataFunctions.cs.include.t4" #>

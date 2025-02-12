@@ -1,0 +1,25 @@
+﻿<script type="text/javascript">
+    jQuery(function ($) {
+        $('.with-decimal').autoNumeric("init", {
+            aSep: '',
+            aDec: '.',
+            aSign: '',
+            vMin: '-99999999.99',
+            vMax: '99999999.99'
+        });
+        $('.no-decimal').autoNumeric("init", {
+            aSep: '',
+            aDec: '.',
+            aSign: '',
+            vMin: '-999999999',
+            vMax: '999999999'
+        });
+        $('.currency-input').autoNumeric("init", {
+            aSep: '',
+            aDec: '.',
+            aSign: '',
+            vMin: '-9999999.99',
+            vMax: '9999999.99'
+        });
+    });
+</script>

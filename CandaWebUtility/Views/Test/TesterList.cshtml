@@ -1,0 +1,24 @@
+﻿@model CandaWebUtility.Controllers.TestController.TestViewModel
+
+@using (Ajax.BeginForm("TestItemAdd", "Test", new { parentid = Model.ParentUniqueId },
+                           new AjaxOptions { UpdateTargetId = "AjaxTestDiv", InsertionMode = InsertionMode.Replace }))
+{
+    <input type="submit" value="+" class="btn-small-flat addplus" />
+}
+
+@using (Ajax.BeginForm("TestItemClear", "Test", new { parentid = Model.ParentUniqueId },
+                           new AjaxOptions { UpdateTargetId = "AjaxTestDiv", InsertionMode = InsertionMode.Replace }))
+{
+    <input type="submit" value="Clear List" class="btn-small-flat btn-small-save" />
+}
+
+@using (Ajax.BeginForm("ThrowException", "Test", new { parentid = Model.ParentUniqueId },
+                           new AjaxOptions { UpdateTargetId = "AjaxTestDiv", InsertionMode = InsertionMode.Replace }))
+{
+    <input type="submit" value="Throw Release / Debug Exception" class="btn-small-flat btn-small-save" />
+}
+
+@foreach (var item in Model.List)
+{
+    <p>@item.Name</p>
+}

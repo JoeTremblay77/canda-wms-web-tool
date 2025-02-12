@@ -1,0 +1,52 @@
+﻿@model CandaWebUtility.Models.LoginViewModel
+
+@{
+    ViewBag.Title = "Sign In";
+}
+
+<div class="form-group">
+    @Html.Label(Model.Warning, new { @class = "control-label col-md-4", style = "color:#ff0000" })
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <section id="loginForm">
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <div class="col-md-7">
+                        <span class="glyphicon glyphicon-user inline"></span>
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-7">
+                        <span class="glyphicon glyphicon-asterisk inline"></span>
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-7">
+                        <input type="submit" value="Sign in" class="btn btn-default" id="sbutton" />
+                    </div>
+                </div>
+                @*<p>
+                        @Html.ActionLink("Forget your password?", "ForgotPassword")
+                    </p>*@
+            }
+        </section>
+    </div>
+
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+
+    </script>
+}

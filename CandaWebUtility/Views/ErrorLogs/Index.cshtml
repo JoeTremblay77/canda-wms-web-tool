@@ -1,0 +1,29 @@
+﻿@model IEnumerable<CandaWebUtility.Data.ErrorLog>
+@using GridMvc.Html
+
+@{
+    ViewBag.Title = "ErrorLog";
+}
+
+<div class="content-wrapper">
+
+    <h4>Error Log</h4>
+    <h5>All Times in @ViewBag.TimeZone</h5>
+
+    <div class="grid-container">
+        @Html.Grid(Model).Columns(columns =>
+{
+
+    columns.Add().Encoded(false).Sanitized(false).SetWidth(20).RenderValueAs(o => Html.ActionLink("Details", "Details", new { id = o.ErrorLogId }));
+
+    columns.Add(c => c.ErrorMessage).Titled("ErrorMessage").Sortable(true).Filterable(true);
+
+    columns.Add(c => c.DateCreated).Titled("DateCreated").Sortable(true).Filterable(true).Format(Defaults.ErrorLogDateTimeFormatGrid);
+
+    columns.Add(c => c.UserName).Titled("UserName").Sortable(true).Filterable(true);
+
+    columns.Add(c => c.Sent).Titled("Sent").Sortable(true).Filterable(true);
+
+}).WithPaging(1000).Sortable(true).Filterable(true).WithMultipleFilters()
+    </div>
+</div>
