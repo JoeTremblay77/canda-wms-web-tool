@@ -90,10 +90,10 @@ namespace CandaWebUtility.Data
         public Nullable<short> STOCK_ITEM { get; set; }
         public Nullable<int> M_T_D { get; set; }
         public string VEND_NUM { get; set; }
-        public Nullable<decimal> ON_HAND { get; set; }
-        public Nullable<decimal> ON_SALES { get; set; }
-        public Nullable<decimal> ON_PURCH { get; set; }
-        public Nullable<decimal> NET_STOCK { get; set; }
+        public decimal ON_HAND { get; set; }
+        public decimal ON_SALES { get; set; }
+        public decimal ON_PURCH { get; set; }
+        public decimal NET_STOCK { get; set; }
         public Nullable<int> FREE_SAMPL { get; set; }
         public string EDP_NUM { get; set; }
         public string FREIGHT_CL { get; set; }
@@ -173,5 +173,8 @@ namespace CandaWebUtility.Data
         public string UPCCaseCode { get; set; }
         public string NatlDrugCode { get; set; }
         public string GTIN { get; set; }
+        public bool SmartCartValidateDimensions { get; set; }
+        public bool IsBase { get; set; }
+        public string EXTENDED2 { get; set; }
     }
 }

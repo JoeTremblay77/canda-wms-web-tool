@@ -27,6 +27,6 @@ namespace CandaWebUtility.Data
     
         public virtual DbSet<BINLOCAT> BINLOCAT { get; set; }
         public virtual DbSet<PRODMSTR> PRODMSTR { get; set; }
-        public virtual DbSet<PASSWORD> PASSWORD { get; set; }
+        public virtual DbSet<CLIENT> CLIENT { get; set; }
     }
 }

@@ -68,5 +68,7 @@ namespace CandaWebUtility.Data
         public string SALESMAN { get; set; }
         public string BUYER { get; set; }
         public string DOCUMENT_REF { get; set; }
+        public decimal Unallocated { get; set; }
+        public string ABC { get; set; }
     }
 }

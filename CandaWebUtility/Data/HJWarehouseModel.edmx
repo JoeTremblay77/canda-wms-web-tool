@@ -64,31 +64,28 @@
           <Property Name="BUYER" Type="nvarchar" MaxLength="50" />
           <Property Name="DOCUMENT_REF" Type="nvarchar" MaxLength="36" />
           <Property Name="UNITS" Type="decimal" Precision="18" Scale="6" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="Unallocated" Type="decimal" Precision="18" Scale="6" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="ABC" Type="nvarchar" MaxLength="1" StoreGeneratedPattern="Computed" Nullable="false" />
         </EntityType>
-        <EntityType Name="PASSWORD">
+        <EntityType Name="CLIENT">
           <Key>
             <PropertyRef Name="ROWID" />
           </Key>
           <Property Name="ROWID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="ISADMIN" Type="char" MaxLength="1" />
-          <Property Name="ID" Type="nvarchar" MaxLength="25" />
-          <Property Name="NAME" Type="nvarchar" MaxLength="50" />
-          <Property Name="PASSWORD" Type="nvarchar" MaxLength="28" />
-          <Property Name="PRIVILEGE" Type="smallint" />
           <Property Name="CLIENTNAME" Type="nvarchar" MaxLength="15" />
           <Property Name="TENANTID" Type="nvarchar" MaxLength="36" />
-          <Property Name="SECURITY" Type="nvarchar" MaxLength="20" />
-          <Property Name="PRNTR_PICK" Type="smallint" />
-          <Property Name="PRNTR_RECV" Type="smallint" />
-          <Property Name="PRNTR_SHIP" Type="smallint" />
-          <Property Name="PRNTR_PACK" Type="smallint" />
-          <Property Name="USER_LANG" Type="nvarchar" MaxLength="10" />
-          <Property Name="CUST_NUM" Type="nvarchar" MaxLength="16" />
-          <Property Name="RFTERMID" Type="bigint" />
-          <Property Name="COMPUTER" Type="nvarchar" MaxLength="20" />
-          <Property Name="LOCATION" Type="nvarchar" MaxLength="10" />
-          <Property Name="PRNTR_BIN" Type="smallint" />
-          <Property Name="PRNTR_PROD" Type="smallint" />
+          <Property Name="DN_PATH_PH" Type="nvarchar" MaxLength="20" />
+          <Property Name="DN_FILE_PH" Type="nvarchar" MaxLength="20" />
+          <Property Name="DN_EXTN_PH" Type="nvarchar" MaxLength="3" />
+          <Property Name="MINCHARGE" Type="nvarchar" MaxLength="100" />
+          <Property Name="RENEWALMETHOD" Type="int" />
+          <Property Name="INVOICETYPE" Type="int" />
+          <Property Name="START_BUSINESS_DATE" Type="datetime" />
+          <Property Name="END_BUSINESS_DATE" Type="datetime" />
+          <Property Name="UPDATE_FLAG" Type="nvarchar" MaxLength="1" />
+          <Property Name="BILL_TO_CLIENT" Type="nvarchar" MaxLength="15" />
+          <Property Name="BACK_ORDER" Type="nvarchar" MaxLength="1" />
+          <Property Name="EXTERNAL_ACCESS" Type="nvarchar" MaxLength="1" />
         </EntityType>
         <EntityType Name="PRODMSTR">
           <Key>
@@ -170,10 +167,6 @@
           <Property Name="STOCK_ITEM" Type="smallint" />
           <Property Name="M_T_D" Type="int" />
           <Property Name="VEND_NUM" Type="nvarchar" MaxLength="16" />
-          <Property Name="ON_HAND" Type="decimal" Precision="18" Scale="6" />
-          <Property Name="ON_SALES" Type="decimal" Precision="18" Scale="6" />
-          <Property Name="ON_PURCH" Type="decimal" Precision="18" Scale="6" />
-          <Property Name="NET_STOCK" Type="decimal" Precision="18" Scale="6" />
           <Property Name="FREE_SAMPL" Type="int" />
           <Property Name="EDP_NUM" Type="nvarchar" MaxLength="10" />
           <Property Name="FREIGHT_CL" Type="nvarchar" MaxLength="5" />
@@ -246,6 +239,7 @@
           <Property Name="PRECISION_PACKS" Type="smallint" />
           <Property Name="RECV_OVER_PERCENT" Type="nvarchar" MaxLength="6" />
           <Property Name="DOCUMENT_REF" Type="nvarchar" MaxLength="36" />
+          <Property Name="SmartCartValidateDimensions" Type="bit" Nullable="false" />
           <Property Name="OuterPack" Type="nvarchar" MaxLength="40" />
           <Property Name="InnerPack" Type="nvarchar" MaxLength="40" />
           <Property Name="ISBN" Type="nvarchar" MaxLength="40" />
@@ -253,10 +247,16 @@
           <Property Name="UPCCaseCode" Type="nvarchar" MaxLength="40" />
           <Property Name="NatlDrugCode" Type="nvarchar" MaxLength="40" />
           <Property Name="GTIN" Type="nvarchar" MaxLength="40" />
+          <Property Name="IsBase" Type="bit" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="ON_HAND" Type="decimal" Precision="18" Scale="6" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="ON_SALES" Type="decimal" Precision="18" Scale="6" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="ON_PURCH" Type="decimal" Precision="18" Scale="6" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="NET_STOCK" Type="decimal" Precision="18" Scale="6" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="EXTENDED2" Type="nvarchar" MaxLength="150" StoreGeneratedPattern="Computed" Nullable="false" />
         </EntityType>
         <EntityContainer Name="HJWarehouseModelStoreContainer">
           <EntitySet Name="BINLOCAT" EntityType="Self.BINLOCAT" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PASSWORD" EntityType="Self.PASSWORD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CLIENT" EntityType="Self.CLIENT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PRODMSTR" EntityType="Self.PRODMSTR" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -266,7 +266,7 @@
         <EntityContainer Name="HJWarehouseEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="BINLOCAT" EntityType="HJWarehouseModel.BINLOCAT" />
           <EntitySet Name="PRODMSTR" EntityType="HJWarehouseModel.PRODMSTR" />
-          <EntitySet Name="PASSWORD" EntityType="HJWarehouseModel.PASSWORD" />
+          <EntitySet Name="CLIENT" EntityType="HJWarehouseModel.CLIENT" />
         </EntityContainer>
         <EntityType Name="BINLOCAT">
           <Key>
@@ -326,6 +326,8 @@
           <Property Name="SALESMAN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="BUYER" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DOCUMENT_REF" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="Unallocated" Type="Decimal" Nullable="false" Precision="18" Scale="6" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="ABC" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="PRODMSTR">
           <Key>
@@ -407,10 +409,10 @@
           <Property Name="STOCK_ITEM" Type="Int16" />
           <Property Name="M_T_D" Type="Int32" />
           <Property Name="VEND_NUM" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="ON_HAND" Type="Decimal" Precision="18" Scale="6" />
-          <Property Name="ON_SALES" Type="Decimal" Precision="18" Scale="6" />
-          <Property Name="ON_PURCH" Type="Decimal" Precision="18" Scale="6" />
-          <Property Name="NET_STOCK" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="ON_HAND" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="ON_SALES" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="ON_PURCH" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="NET_STOCK" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="FREE_SAMPL" Type="Int32" />
           <Property Name="EDP_NUM" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="FREIGHT_CL" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
@@ -490,31 +492,29 @@
           <Property Name="UPCCaseCode" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
           <Property Name="NatlDrugCode" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
           <Property Name="GTIN" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="SmartCartValidateDimensions" Type="Boolean" Nullable="false" />
+          <Property Name="IsBase" Type="Boolean" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="EXTENDED2" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
         </EntityType>
-        <EntityType Name="PASSWORD">
+        <EntityType Name="CLIENT">
           <Key>
             <PropertyRef Name="ROWID" />
           </Key>
           <Property Name="ROWID" Type="Guid" Nullable="false" />
-          <Property Name="ISADMIN" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="ID" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PASSWORD1" Type="String" MaxLength="28" FixedLength="false" Unicode="true" />
-          <Property Name="PRIVILEGE" Type="Int16" />
           <Property Name="CLIENTNAME" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="TENANTID" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
-          <Property Name="SECURITY" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="PRNTR_PICK" Type="Int16" />
-          <Property Name="PRNTR_RECV" Type="Int16" />
-          <Property Name="PRNTR_SHIP" Type="Int16" />
-          <Property Name="PRNTR_PACK" Type="Int16" />
-          <Property Name="USER_LANG" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="CUST_NUM" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="RFTERMID" Type="Int64" />
-          <Property Name="COMPUTER" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="LOCATION" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="PRNTR_BIN" Type="Int16" />
-          <Property Name="PRNTR_PROD" Type="Int16" />
+          <Property Name="DN_PATH_PH" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DN_FILE_PH" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DN_EXTN_PH" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="MINCHARGE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="RENEWALMETHOD" Type="Int32" />
+          <Property Name="INVOICETYPE" Type="Int32" />
+          <Property Name="START_BUSINESS_DATE" Type="DateTime" Precision="3" />
+          <Property Name="END_BUSINESS_DATE" Type="DateTime" Precision="3" />
+          <Property Name="UPDATE_FLAG" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="BILL_TO_CLIENT" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="BACK_ORDER" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="EXTERNAL_ACCESS" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -525,6 +525,8 @@
           <EntitySetMapping Name="BINLOCAT">
             <EntityTypeMapping TypeName="HJWarehouseModel.BINLOCAT">
               <MappingFragment StoreEntitySet="BINLOCAT">
+                <ScalarProperty Name="ABC" ColumnName="ABC" />
+                <ScalarProperty Name="Unallocated" ColumnName="Unallocated" />
                 <ScalarProperty Name="DOCUMENT_REF" ColumnName="DOCUMENT_REF" />
                 <ScalarProperty Name="BUYER" ColumnName="BUYER" />
                 <ScalarProperty Name="SALESMAN" ColumnName="SALESMAN" />
@@ -585,6 +587,9 @@
           <EntitySetMapping Name="PRODMSTR">
             <EntityTypeMapping TypeName="HJWarehouseModel.PRODMSTR">
               <MappingFragment StoreEntitySet="PRODMSTR">
+                <ScalarProperty Name="EXTENDED2" ColumnName="EXTENDED2" />
+                <ScalarProperty Name="IsBase" ColumnName="IsBase" />
+                <ScalarProperty Name="SmartCartValidateDimensions" ColumnName="SmartCartValidateDimensions" />
                 <ScalarProperty Name="GTIN" ColumnName="GTIN" />
                 <ScalarProperty Name="NatlDrugCode" ColumnName="NatlDrugCode" />
                 <ScalarProperty Name="UPCCaseCode" ColumnName="UPCCaseCode" />
@@ -747,28 +752,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PASSWORD">
-            <EntityTypeMapping TypeName="HJWarehouseModel.PASSWORD">
-              <MappingFragment StoreEntitySet="PASSWORD">
-                <ScalarProperty Name="PRNTR_PROD" ColumnName="PRNTR_PROD" />
-                <ScalarProperty Name="PRNTR_BIN" ColumnName="PRNTR_BIN" />
-                <ScalarProperty Name="LOCATION" ColumnName="LOCATION" />
-                <ScalarProperty Name="COMPUTER" ColumnName="COMPUTER" />
-                <ScalarProperty Name="RFTERMID" ColumnName="RFTERMID" />
-                <ScalarProperty Name="CUST_NUM" ColumnName="CUST_NUM" />
-                <ScalarProperty Name="USER_LANG" ColumnName="USER_LANG" />
-                <ScalarProperty Name="PRNTR_PACK" ColumnName="PRNTR_PACK" />
-                <ScalarProperty Name="PRNTR_SHIP" ColumnName="PRNTR_SHIP" />
-                <ScalarProperty Name="PRNTR_RECV" ColumnName="PRNTR_RECV" />
-                <ScalarProperty Name="PRNTR_PICK" ColumnName="PRNTR_PICK" />
-                <ScalarProperty Name="SECURITY" ColumnName="SECURITY" />
+          <EntitySetMapping Name="CLIENT">
+            <EntityTypeMapping TypeName="HJWarehouseModel.CLIENT">
+              <MappingFragment StoreEntitySet="CLIENT">
+                <ScalarProperty Name="EXTERNAL_ACCESS" ColumnName="EXTERNAL_ACCESS" />
+                <ScalarProperty Name="BACK_ORDER" ColumnName="BACK_ORDER" />
+                <ScalarProperty Name="BILL_TO_CLIENT" ColumnName="BILL_TO_CLIENT" />
+                <ScalarProperty Name="UPDATE_FLAG" ColumnName="UPDATE_FLAG" />
+                <ScalarProperty Name="END_BUSINESS_DATE" ColumnName="END_BUSINESS_DATE" />
+                <ScalarProperty Name="START_BUSINESS_DATE" ColumnName="START_BUSINESS_DATE" />
+                <ScalarProperty Name="INVOICETYPE" ColumnName="INVOICETYPE" />
+                <ScalarProperty Name="RENEWALMETHOD" ColumnName="RENEWALMETHOD" />
+                <ScalarProperty Name="MINCHARGE" ColumnName="MINCHARGE" />
+                <ScalarProperty Name="DN_EXTN_PH" ColumnName="DN_EXTN_PH" />
+                <ScalarProperty Name="DN_FILE_PH" ColumnName="DN_FILE_PH" />
+                <ScalarProperty Name="DN_PATH_PH" ColumnName="DN_PATH_PH" />
                 <ScalarProperty Name="TENANTID" ColumnName="TENANTID" />
                 <ScalarProperty Name="CLIENTNAME" ColumnName="CLIENTNAME" />
-                <ScalarProperty Name="PRIVILEGE" ColumnName="PRIVILEGE" />
-                <ScalarProperty Name="PASSWORD1" ColumnName="PASSWORD" />
-                <ScalarProperty Name="NAME" ColumnName="NAME" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="ISADMIN" ColumnName="ISADMIN" />
                 <ScalarProperty Name="ROWID" ColumnName="ROWID" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -476,6 +476,9 @@
     <Compile Include="Data\BINLOCAT.cs">
       <DependentUpon>HJWarehouseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\CLIENT.cs">
+      <DependentUpon>HJWarehouseModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\ErrorLog.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -509,9 +512,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Data\PASSWORD.cs">
-      <DependentUpon>HJWarehouseModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Data\PRODMSTR.cs">
       <DependentUpon>HJWarehouseModel.tt</DependentUpon>
     </Compile>
@@ -529,6 +529,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Managers\AuthenticationManager.cs" />
     <Compile Include="Managers\DeploymentState.cs" />
     <Compile Include="Managers\EmailManager.cs" />
     <Compile Include="Managers\GlobalCode.cs" />

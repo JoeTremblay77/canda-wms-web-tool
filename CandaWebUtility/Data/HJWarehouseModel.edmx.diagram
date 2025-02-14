@@ -7,7 +7,7 @@
       <Diagram DiagramId="ca5fb7a8f0d447f2af33871ed885d177" Name="Diagram1" ZoomLevel="78">
         <EntityTypeShape EntityType="HJWarehouseModel.BINLOCAT" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="HJWarehouseModel.PRODMSTR" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="HJWarehouseModel.PASSWORD" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="HJWarehouseModel.CLIENT" Width="1.5" PointX="5.25" PointY="0.875" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

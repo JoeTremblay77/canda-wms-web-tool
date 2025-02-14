@@ -345,60 +345,23 @@ namespace CandaWebUtility.Controllers
         {
             using (HJWarehouseEntities db = new HJWarehouseEntities())
             {
-                var pwd = db.PASSWORD.Where(m => m.ID == model.UserName).FirstOrDefault();
-                if (pwd == null)
+                //TODO: Use ODATE TO VALIDATE PASSWORD 
+
+                AuthenicationManagementReturnValue retVal = await AuthenticationManagement.ValidateCredentials(model.UserName, model.Password);
+
+                if (retVal.Success)
                 {
-                    model.Warning = "User Name not found";
+                    Session[HighJumpUser.UserName] = model.UserName;
+                    Session[HighJumpUser.ID] = model.UserName;
+                    return RedirectToAction("Index", "HighJumpUtility");
+                }
+                else
+                {
+                    model.Warning = retVal.Message;
                     return View(model);
                 }
-
-                if (pwd.PASSWORD1 != model.Password)
-                {
-                    model.Warning = "Incorrect Password";
-                    return View(model);
-                }
-
-                Session[HighJumpUser.UserName] = model.UserName;
-                Session[HighJumpUser.ID] = pwd.ID;
-
-                return RedirectToAction("Index", "HighJumpUtility");
+                
             }
-
-   
-
-            //    if (!ModelState.IsValid)
-            //    {
-            //        return View(model);
-            //    }
-
-            //// Require the user to have a confirmed email before they can log on.
-            //var user = await UserManager.FindByNameAsync(model.Email.ToLower());
-            //if (user != null)
-            //{
-            //    if (!await UserManager.IsEmailConfirmedAsync(user.Id))
-            //    {
-            //        ViewBag.errorMessage = "You must have a confirmed email to Sign In.";
-            //        return View("Error");
-            //    }
-            //}
-
-            //var result = await SignInManager.PasswordSignInAsync(model.Email.ToLower(), model.Password, model.RememberMe, shouldLockout: true);
-            //switch (result)
-            //{
-            //    case SignInStatus.Success:
-            //        return RedirectToLocal(returnUrl);
-
-            //    case SignInStatus.LockedOut:
-            //        return View("Lockout");
-
-            //    case SignInStatus.RequiresVerification:
-            //        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl });
-
-            //    case SignInStatus.Failure:
-            //    default:
-            //        ModelState.AddModelError("", "Invalid login attempt.");
-            //        return View(model);
-            //}
         }
 
         //
