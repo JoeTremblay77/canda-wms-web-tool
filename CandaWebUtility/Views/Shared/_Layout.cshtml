@@ -28,33 +28,19 @@
 
             @if(Session[CandaWebUtility.HighJumpUser.ID] != null)
             {
-                <span>@Session[CandaWebUtility.HighJumpUser.ID].ToString()</span>
+                <span style="padding-right: 20px;">Logged in as: @Session[CandaWebUtility.HighJumpUser.ID].ToString()</span>
             }
         </div>
         <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav" style="height: 70px; padding-top: 10px;">
 
-                <li class="top-menu-item">@Html.ActionLink("High Jump Utility", "Index", "HighJumpUtility")</li>
+                <li class="top-menu-item">@Html.ActionLink("Search Page", "Index", "HighJumpUtility")</li>
 
-                @*@if (Request.IsAuthenticated)
-                {
-                    if (User.IsInRole(ApplicationRoles.Admin))
-                    {
-                        <li class="dropdown top-menu-item  no-left-border">
-                            <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" id="dropdownMenuAdmin">
-                                Admin
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuAdmin">
-                                <li>@Html.ActionLink("Manage Users", "Index", "UsersAdmin")</li>
-                                <li role="separator" class="divider"></li>
-                                <li>@Html.ActionLink("Admin Home", "Index", "Admin")</li>
-                            </ul>
-                        </li>
-                    }
-                }*@
             </ul>
 
-            @Html.Partial("_LoginPartial")
+            <ul class="nav navbar-nav navbar-right" style="height: 100px; padding-top: 30px;">
+                <li>@Html.ActionLink("Sign In", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+            </ul>
         </div>
 
     </div>
