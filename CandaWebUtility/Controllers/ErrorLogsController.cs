@@ -1,5 +1,4 @@
 ﻿using CandaWebUtility.Data;
-using CandaWebUtility.Data;
 using System;
 using System.Linq;
 using System.Web.Mvc;

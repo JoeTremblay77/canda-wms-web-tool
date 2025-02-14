@@ -30,5 +30,6 @@ namespace CandaWebUtility.Data
         public virtual DbSet<TimeZoneSetting> TimeZoneSetting { get; set; }
         public virtual DbSet<UserInfo> UserInfo { get; set; }
         public virtual DbSet<AccountEmailSMTP> AccountEmailSMTP { get; set; }
+        public virtual DbSet<Logging> Logging { get; set; }
     }
 }

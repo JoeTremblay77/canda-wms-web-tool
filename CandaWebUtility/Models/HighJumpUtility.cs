@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace CandaWebUtility.Models
@@ -285,9 +286,9 @@ namespace CandaWebUtility.Models
                         if (binlocat.EXTENDED.Contains('/'))
                         {
                             string[] extendedsplit = binlocat.EXTENDED.Split('/');
-                            if (extendedsplit.Length == 2)
+                            if (extendedsplit.Length == 3)
                             {
-                                entry.Lot = extendedsplit[1].Trim();
+                                entry.Lot = extendedsplit[2].Trim();
                             }
                             else
                             {
@@ -378,7 +379,7 @@ namespace CandaWebUtility.Models
             }
         }
 
-        internal void ChangeAllExpiryDates(string userID)
+        internal async Task ChangeAllExpiryDates(string userID)
         {
             getResultList(this.ProductSearchText, this.LotSearchText);
 
@@ -392,6 +393,8 @@ namespace CandaWebUtility.Models
                         dbrow.DATECREATE = this.ExpiryDate;
                         dbrow.USER_ID = userID;
 
+                        await LogMessagesManager.Log(LogType.ExpiryDate, userID, "Prod: " + dbrow.PRODUCT + ", Lot: " + entry.BinLabel + ", Bin: " + entry.BinLabel, 
+                            entry.ExpiryDate.ToLongDateString(), this.ExpiryDate.ToLongDateString());
                         entry.ExpiryDate = this.ExpiryDate;
                     }
                 }

@@ -347,10 +347,11 @@ namespace CandaWebUtility.Controllers
             {
                 //TODO: Use ODATE TO VALIDATE PASSWORD 
 
-                AuthenicationManagementReturnValue retVal = await AuthenticationManagement.ValidateCredentials(model.UserName, model.Password);
+                KoerberLibReturnObject retVal = await KoerberLib.LogOn(model.UserName, model.Password);
 
                 if (retVal.Success)
                 {
+                    await LogMessagesManager.Log(LogType.Login, model.UserName);
                     Session[HighJumpUser.UserName] = model.UserName;
                     Session[HighJumpUser.ID] = model.UserName;
                     return RedirectToAction("Index", "HighJumpUtility");

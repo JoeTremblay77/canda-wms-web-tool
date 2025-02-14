@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -10,7 +11,7 @@ namespace CandaWebUtility.Controllers
     public class HighJumpUtilityController : Controller
     {
         [AllowAnonymous]
-        public ActionResult ChangeAllExpiryDates(HighJumpUtilitySearch model)
+        public async Task<ActionResult> ChangeAllExpiryDates(HighJumpUtilitySearch model)
         {
             if (model.ProductSearchText == null)
             {
@@ -24,7 +25,9 @@ namespace CandaWebUtility.Controllers
 
             string userID = Session[HighJumpUser.ID].ToString();
 
-            model.ChangeAllExpiryDates(userID);
+            await model.ChangeAllExpiryDates(userID);
+
+            
 
             return View("Index", model);
         }

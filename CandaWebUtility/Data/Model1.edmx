@@ -32,6 +32,18 @@
           <Property Name="StackTrace" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Sent" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="Logging">
+          <Key>
+            <PropertyRef Name="ROWID" />
+          </Key>
+          <Property Name="ROWID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DateTimeStamp" Type="datetime" Nullable="false" />
+          <Property Name="User" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Action" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Message" Type="nvarchar" MaxLength="2000" Nullable="false" />
+          <Property Name="FromValue" Type="nvarchar" MaxLength="2000" Nullable="false" />
+          <Property Name="ToValue" Type="nvarchar" MaxLength="2000" Nullable="false" />
+        </EntityType>
         <EntityType Name="Settings">
           <Key>
             <PropertyRef Name="SettingId" />
@@ -59,6 +71,7 @@
         <EntityContainer Name="EFModelStoreContainer">
           <EntitySet Name="AccountEmailSMTP" EntityType="Self.AccountEmailSMTP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Logging" EntityType="Self.Logging" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Settings" EntityType="Self.Settings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TimeZoneSetting" EntityType="Self.TimeZoneSetting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
@@ -109,6 +122,7 @@
           <EntitySet Name="TimeZoneSetting" EntityType="Self.TimeZoneSetting" />
           <EntitySet Name="UserInfo" EntityType="Self.UserInfo" />
           <EntitySet Name="AccountEmailSMTP" EntityType="EFModel.AccountEmailSMTP" />
+          <EntitySet Name="Logging" EntityType="EFModel.Logging" />
         </EntityContainer>
         <EntityType Name="AccountEmailSMTP">
           <Key>
@@ -124,6 +138,18 @@
           <Property Name="UserModified" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="DateModified" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UseSSL" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Logging">
+          <Key>
+            <PropertyRef Name="ROWID" />
+          </Key>
+          <Property Name="ROWID" Type="Guid" Nullable="false" />
+          <Property Name="DateTimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="User" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Action" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="FromValue" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="ToValue" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -184,6 +210,19 @@
                 <ScalarProperty Name="FromEmailAddress" ColumnName="FromEmailAddress" />
                 <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
                 <ScalarProperty Name="EmailSettingId" ColumnName="EmailSettingId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logging">
+            <EntityTypeMapping TypeName="EFModel.Logging">
+              <MappingFragment StoreEntitySet="Logging">
+                <ScalarProperty Name="ToValue" ColumnName="ToValue" />
+                <ScalarProperty Name="FromValue" ColumnName="FromValue" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="User" ColumnName="User" />
+                <ScalarProperty Name="DateTimeStamp" ColumnName="DateTimeStamp" />
+                <ScalarProperty Name="ROWID" ColumnName="ROWID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

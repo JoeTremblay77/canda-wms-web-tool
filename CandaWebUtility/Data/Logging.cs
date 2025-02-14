@@ -12,14 +12,14 @@ namespace CandaWebUtility.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class ErrorLog
+    public partial class Logging
     {
-        public System.Guid ErrorLogId { get; set; } = Guid.NewGuid();
-        public System.DateTime DateCreated { get; set; } = DateTime.Now;
-        public string UserName { get; set; }
-        public string Severity { get; set; }
-        public string ErrorMessage { get; set; }
-        public string StackTrace { get; set; }
-        public bool Sent { get; set; }
+        public System.Guid ROWID { get; set; }
+        public System.DateTime DateTimeStamp { get; set; }
+        public string User { get; set; }
+        public string Action { get; set; }
+        public string Message { get; set; }
+        public string FromValue { get; set; }
+        public string ToValue { get; set; }
     }
 }

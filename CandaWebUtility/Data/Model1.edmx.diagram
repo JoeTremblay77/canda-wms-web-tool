@@ -10,6 +10,7 @@
         <EntityTypeShape EntityType="EFModel.TimeZoneSetting" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="EFModel.UserInfo" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="EFModel.AccountEmailSMTP" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="EFModel.Logging" Width="1.5" PointX="3.375" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

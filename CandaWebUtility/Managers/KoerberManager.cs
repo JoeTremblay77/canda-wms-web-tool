@@ -2,23 +2,20 @@
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Configuration;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-
-using System.Threading.Tasks;
-using System.Configuration;
-using System.EnterpriseServices;
-using Microsoft.Ajax.Utilities;
-using Newtonsoft.Json;
-using System.Web.UI.WebControls;
-
-public class AuthenicationManagementReturnValue
+public class KoerberLibReturnObject
 {
     public bool Success { get; set; } = false;
     public string Message { get; set; } = "";
+
+    public string SerializedAuthenticationTicket { get; set; } = "";
+
 }
 
- public class AuthOdataPayload
+public class AuthOdataPayload
 {
     public AuthOdataPayload(string userName, string password)
     {
@@ -32,12 +29,12 @@ public class AuthenicationManagementReturnValue
     public string connectionType { get; set; } = "Integration";
 }
 
-public class AuthenticationManagement
+public class KoerberLib
 {
 
-    public static async Task<AuthenicationManagementReturnValue> ValidateCredentials(string userName, string password)
+    public static async Task<KoerberLibReturnObject> LogOn(string userName, string password)
     {
-        var retVal = new AuthenicationManagementReturnValue();
+        var retVal = new KoerberLibReturnObject();
         try
         {
             string odataURL = ConfigurationManager.ConnectionStrings["KoerberOdataURL"].ConnectionString;
@@ -58,7 +55,10 @@ public class AuthenticationManagement
                 if (response.IsSuccessStatusCode)
                 {
                     retVal.Success = true;
-                    //TODO: Log out
+                    string jsonResponse = await response.Content.ReadAsStringAsync();
+                    JObject data = JObject.Parse(jsonResponse);
+                    string serializedTicket = data["SerializedAuthenticationTicket"]?.ToString();
+                    retVal.SerializedAuthenticationTicket = serializedTicket;
                 }
                 else
                 {
@@ -74,4 +74,6 @@ public class AuthenticationManagement
         }
         return retVal;
     }
+
+   
 }

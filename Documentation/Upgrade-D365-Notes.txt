@@ -1,3 +1,8 @@
+
+Test product: 100506 non lot
+100228 has lot ZSNS107
+
+
 zip pwd: T7d8876$23
 
 Development notes: 
